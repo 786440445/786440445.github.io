@@ -359,7 +359,10 @@
                     
                 </h3>
                 <div class="post-content-preview">
-                    4.30 面试记录ASR:
+                     4.30 面试记录
+ ASR:
+
+
 CE和CTC loss区别
 
 
@@ -371,11 +374,15 @@ CE和CTC loss区别
 
 傅立叶变换和卷积计算的区别
 
-TTS
+
+ TTS
+
+
 MelGan
 
 
 什么是回归，自回归，分类与回归的区别
+
 
 ...
                 </div>
@@ -407,7 +414,8 @@ MelGan
                     MelGan
                 </h3>
                 <div class="post-content-preview">
-                    MelGan...
+                     MelGan
+...
                 </div>
             </a>
             
@@ -439,7 +447,11 @@ MelGan
                     Tacotron2
                 </h3>
                 <div class="post-content-preview">
-                    Tacotron2EncoderDecoderAttention...
+                     Tacotron2
+ Encoder
+ Decoder
+ Attention
+...
                 </div>
             </a>
             
@@ -471,10 +483,13 @@ MelGan
                     词向量
                 </h3>
                 <div class="post-content-preview">
-                    Word2vec一. wordvec简介
+                     Word2vec
+ 一. wordvec简介
+
 wordvec是一种训练词向量分布式表示（distrubute representation）的方式。
 分为cbow和skip-gram两种训练方式。cbow通过上下文词汇作为输入，中间词汇作为输出。skip-gram通过中间词汇作为输入，上下文词汇作为输出，进行训练。
-如果是用一个词语作为输入，来预测它周围的上下文，那这个模型叫做『Skip-gra......
+
+如果是用一个词语作为输入，来预测它周围的上下文，那这个模型叫做『Ski......
                 </div>
             </a>
             
@@ -506,9 +521,12 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
                     文本相似度
                 </h3>
                 <div class="post-content-preview">
-                    文本相似度​    在自然语言处理(Natural Language Processing, NLP)中，经常会涉及到如何度量两个文本的相似度问题。在诸如对话系统(Dialog system)和信息检索(Information retrieval)等的问题中，如何度量句子或者短语之间的相似度尤为重要。
-1.基于关键词匹配的传统方法1.1 n-gram相似度
-基于N-Gram模型定义的句子（字......
+                     文本相似度
+​	在自然语言处理(Natural Language Processing, NLP)中，经常会涉及到如何度量两个文本的相似度问题。在诸如对话系统(Dialog system)和信息检索(Information retrieval)等的问题中，如何度量句子或者短语之间的相似度尤为重要。
+ 1.基于关键词匹配的传统方法
+ 1.1 n-gram相似度
+
+基于N-Gram模型定义的句......
                 </div>
             </a>
             
@@ -540,9 +558,10 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
                     
                 </h3>
                 <div class="post-content-preview">
-                    BiMPM：双向多视角匹配​    文本蕴含或者自然语言推理任务，就是判断后一句话（假设句）能否从前一句话（前提句）中推断出来。
-​    在BiMPM论文提出前，大量的学者在对两句话进行匹配时，常常仅考虑到前一句话对后一句话，或后一句话对前一句话的单向语义匹配，忽略了双向语义匹配的重要性；
-​    并且一般只考虑单一粒度的语义匹配（逐字或逐句）。基于以上不足，该论文作者提出了bilate......
+                     BiMPM：双向多视角匹配
+​	文本蕴含或者自然语言推理任务，就是判断后一句话（假设句）能否从前一句话（前提句）中推断出来。
+​	在BiMPM论文提出前，大量的学者在对两句话进行匹配时，常常仅考虑到前一句话对后一句话，或后一句话对前一句话的单向语义匹配，忽略了双向语义匹配的重要性；
+​	并且一般只考虑单一粒度的语义匹配（逐字或逐句）。基于以上不足，该论文作者提出了bilateral mul......
                 </div>
             </a>
             
@@ -574,9 +593,11 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
                     深度学习
                 </h3>
                 <div class="post-content-preview">
-                    DRCN：密集循环注意力网络1.Word Representation Layer​    将输入的两个句子表示为P和Q，长度分别为I和J。每个词的word representation feature由三部分构成：word embedding, character representation, the exact matched flag。
+                     DRCN：密集循环注意力网络
+ 1.Word Representation Layer
+​	将输入的两个句子表示为P和Q，长度分别为I和J。每个词的word representation feature由三部分构成：word embedding, character representation, the exact matched flag。
 
-其中word embedding包括固定好的......
+其中word embedding包括固定好......
                 </div>
             </a>
             
@@ -608,11 +629,13 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
                     深度学习
                 </h3>
                 <div class="post-content-preview">
-                    DIIN：密集交互推断网络1. Embedding Layer:将词向量，字符特征向量和句法特征向量 进行串联。
+                     DIIN：密集交互推断网络
+ 1. Embedding Layer:
+将词向量，字符特征向量和句法特征向量 进行串联。
 词向量可以是通过预训练模型word2vec拿到。
 字符特征向量是将字符向量 经过一维卷积，然后最大池化得到。
 句法特征向量由词性Pos特征向量和二进制精确匹配EM特征向量组成。如果在另一个句子中有与该词具有相同词干或相同词元的词，那么EM值会被激活。
-2. Eocoding La......
+ 2. Eocodi......
                 </div>
             </a>
             
@@ -644,9 +667,9 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
                     词向量
                 </h3>
                 <div class="post-content-preview">
-                    FastText
-fastText是Facebook于2016年开源的一个词向量计算和文本分类工具，在学术上并没有太大创新。但是它的优点也非常明显，在文本分类任务中，fastText（浅层网络）往往能取得和深度网络相媲美的精度，却在训练时间上比深度网络快许多数量级。在标准的多核CPU上， 能够训练10亿词级别语料库的词向量在10分钟之内，能够分类有着30万多类别的50多万句子在1分钟之内。
-......
+                     FastText
+
+fastText是Facebook于2016年开源的一个词向量计算和文本分类工具，在学术上并没有太大创新。但是它的优点也非常明显，在文本分类任务中，fastText（浅层网络）往往能取得和深度网络相媲美的精度，却在训练时间上比深度网络快许多数量级。在标准的多核CPU上， 能够训练10亿词级别语料库的词向量在10分钟之内，能够分类有着30万多类别的50多万句子在1分钟之内......
                 </div>
             </a>
             
@@ -678,13 +701,15 @@ fastText是Facebook于2016年开源的一个词向量计算和文本分类工具
                     隐马尔可夫和条件随机场
                 </h3>
                 <div class="post-content-preview">
-                    HMM分词
-解决三个问题：模型λ=（A，B，π）。A为状态转移概率矩阵，B是观测概率矩阵。π是初始状态概率向量。π和A决定状态序列。B决定观测序列。O为观测序列，I为状态序列。
+                     HMM分词
+
+解决三个问题：模型λ=（A，B，π）。A为状态转移概率矩阵，B是观测概率矩阵。π是初始状态概率向量。
+π和A决定状态序列。B决定观测序列。O为观测序列，I为状态序列。
 
 
-概率计算问题：已知（A，B，π），和O观测序列。求：O观测序列出现概率P(O|λ)。 
+概率计算问题：已知（A，B，π），和O观测序列。求：O观测序列出现概率P(O|λ)。
 学习问题：已知O观测序列，估计模型的参数λ，使P(O|λ)最大。
-预测问题：也就是解码问题。已知λ=（A，B，π）和观测序列......
+预测问题：也就是解码问题。已知λ=（A，B，π）和观测......
                 </div>
             </a>
             
@@ -763,11 +788,13 @@ fastText是Facebook于2016年开源的一个词向量计算和文本分类工具
             
         
             
-            <a href="/tags/#语音识别" title="语音识别" rel="4">语音识别</a>
+            <a href="/tags/#机器学习" title="机器学习" rel="3">机器学习</a>
             
         
             
-            <a href="/tags/#机器学习" title="机器学习" rel="3">机器学习</a>
+            <a href="/tags/#语音识别" title="语音识别" rel="4">语音识别</a>
+            
+        
             
         
             
@@ -780,8 +807,6 @@ fastText是Facebook于2016年开源的一个词向量计算和文本分类工具
         
             
             <a href="/tags/#tensorflow" title="tensorflow" rel="22">tensorflow</a>
-            
-        
             
         
             

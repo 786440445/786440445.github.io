@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">920</span> and
+                                Words <span class="post-count">921</span> and
                                 Reading Time <span class="post-count">3</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -274,56 +274,73 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="TextRank算法"><a href="#TextRank算法" class="headerlink" title="TextRank算法"></a>TextRank算法</h1><h2 id="pagerank"><a href="#pagerank" class="headerlink" title="pagerank"></a>pagerank</h2><ul>
+                <h1 id="textrank算法"><a class="markdownIt-Anchor" href="#textrank算法"></a> TextRank算法</h1>
+<h2 id="pagerank"><a class="markdownIt-Anchor" href="#pagerank"></a> pagerank</h2>
+<ul>
 <li>TextRank来源于PageRank算法，PageRank算法如下所示：</li>
 </ul>
-<p><img src="\img\article\pagerank01.png" style="zoom: 67%;" /></p>
+<img src="\img\article\pagerank01.png" style="zoom: 67%;" />
 <ol>
 <li>d为固定系数0.85，S(Vi)表示Vi的权重，In[Vi]为Vi的入度的节点集合，Out(Vj)为Vj出度的节点的集合。绝对值表示其个数。</li>
 <li>迭代n次后，网页中节点的权重参数不再变化，最后每一个节点的S(Vi)即为该节点的重要性。</li>
 </ol>
-<h2 id="TextRank"><a href="#TextRank" class="headerlink" title="TextRank"></a>TextRank</h2><ul>
-<li><p>若在pagerank中将每个图中的节点换成句子，或者是关键词，则可以演进为TextRank算法。（计算公式如下所示d=0.85</p>
-<p><img src="\img\article\image-20191120144110314.png" alt="image-20191120144110314"></p>
+<h2 id="textrank"><a class="markdownIt-Anchor" href="#textrank"></a> TextRank</h2>
+<ul>
+<li>
+<p>若在pagerank中将每个图中的节点换成句子，或者是关键词，则可以演进为TextRank算法。（计算公式如下所示d=0.85</p>
+<p><img src="%5Cimg%5Carticle%5Cimage-20191120144110314.png" alt="image-20191120144110314" /></p>
 </li>
-<li><p>对于摘要提取过程，图的信息主要来自于边的权重，边的权重是句子i和句子j的相似度。所以在迭代的过程中需要乘上边的权重。 </p>
+<li>
+<p>对于摘要提取过程，图的信息主要来自于边的权重，边的权重是句子i和句子j的相似度。所以在迭代的过程中需要乘上边的权重。</p>
 </li>
-<li><p>两个句子的相似程度计算如下：</p>
-<p><img src="\img\article\textrank-01.png" style="zoom: 67%;" /></p>
+<li>
+<p>两个句子的相似程度计算如下：</p>
+<img src="\img\article\textrank-01.png" style="zoom: 67%;" />
 <ol>
-<li>分子是在两个句子中都出现的单词的数量。|Si|是句子i的单词数。 </li>
+<li>分子是在两个句子中都出现的单词的数量。|Si|是句子i的单词数。</li>
 <li>这里采用jieba分词对每两个句子之前进行计算相似度。</li>
 </ol>
 </li>
-<li><p>整体过程就是一个迭代过程，一次遍历，就是遍历所有节点。</p>
+<li>
+<p>整体过程就是一个迭代过程，一次遍历，就是遍历所有节点。</p>
 </li>
 </ul>
-<h2 id="关于textrank算法在弹幕提取中的应用："><a href="#关于textrank算法在弹幕提取中的应用：" class="headerlink" title="关于textrank算法在弹幕提取中的应用："></a>关于textrank算法在弹幕提取中的应用：</h2><ol>
+<h2 id="关于textrank算法在弹幕提取中的应用"><a class="markdownIt-Anchor" href="#关于textrank算法在弹幕提取中的应用"></a> 关于textrank算法在弹幕提取中的应用：</h2>
+<ol>
 <li>首先根据每一个直播间的前8000条弹幕（按频数选取，从高到底选取8000条，不用全部，全部都有几千万乃至上亿条，数据量过大不需要）。</li>
 <li>初始设置特殊弹幕的权重为1，其他所有弹幕权重为0.5。</li>
 <li>计算每两个句子之间的相似度，这里按照上式的公式来计算。</li>
-<li>按照textrank算法迭代，直到图收敛。<ul>
+<li>按照textrank算法迭代，直到图收敛。
+<ul>
 <li>一次遍历计算所有句子的得分：根据(1-d)+d*所有入度的句子里的</li>
 </ul>
 </li>
 <li>最后选出top50的弹幕作为自己提取的关键性弹幕。</li>
 </ol>
-<h1 id="TF-IDF算法"><a href="#TF-IDF算法" class="headerlink" title="TF-IDF算法"></a>TF-IDF算法</h1><ol>
-<li><p>Text Frequency：统计出现次数最多的词：关键句在该文档中出现的频数</p>
+<h1 id="tf-idf算法"><a class="markdownIt-Anchor" href="#tf-idf算法"></a> TF-IDF算法</h1>
+<ol>
+<li>
+<p>Text Frequency：统计出现次数最多的词：关键句在该文档中出现的频数</p>
 </li>
-<li><p>Inverse Document Frequency：IDF逆文档频率，log(文档的总数量/关键句在文档中出现次数+1)</p>
+<li>
+<p>Inverse Document Frequency：IDF逆文档频率，log(文档的总数量/关键句在文档中出现次数+1)</p>
 </li>
 </ol>
-<h2 id="关于tf-idf在弹幕提取中的应用"><a href="#关于tf-idf在弹幕提取中的应用" class="headerlink" title="关于tf-idf在弹幕提取中的应用"></a>关于tf-idf在弹幕提取中的应用</h2><ol>
+<h2 id="关于tf-idf在弹幕提取中的应用"><a class="markdownIt-Anchor" href="#关于tf-idf在弹幕提取中的应用"></a> 关于tf-idf在弹幕提取中的应用</h2>
+<ol>
 <li>判断当前文本在当前直播间所有弹幕中出现的频数。这里需要根据文本相似度进行计算。不能直接根据弹幕的频数计算，因为，从数据库中读取的数据都是合并后的topN数据。</li>
 <li>计算逆文档频率。log(sum/count+1)。sum表示文档总数，count表示当前弹幕在其他文档里出现的次数（加1是为了防止一次都没有出现）</li>
 <li>TF*IDF就表示最后的弹幕的权重。按照权重topN来进行提取选择。</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TfIdf</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__int__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calc_tf</span><span class="params">(self, lst)</span>:</span></span><br><span class="line">        if_dict = Counter(lst)</span><br><span class="line">        <span class="keyword">return</span> if_dict</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calc_idf</span><span class="params">(self, lst, document_lst)</span>:</span></span><br><span class="line">        num = len(document_lst)</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        idf_dict = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> lst:</span><br><span class="line">            <span class="keyword">for</span> doc <span class="keyword">in</span> document_lst:</span><br><span class="line">                <span class="keyword">if</span> doc.get(item):</span><br><span class="line">                    count += <span class="number">1</span></span><br><span class="line">            idf_dict[item] = math.log(num/(count+<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">return</span> idf_dict</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_tf_idf_scores</span><span class="params">(self, tf_scores, idf_scores, top_num)</span>:</span></span><br><span class="line">        result = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> k, (content, tf) <span class="keyword">in</span> enumerate(tf_scores.items()):</span><br><span class="line">            idf = idf_scores.get(content)</span><br><span class="line">            scores = tf * idf</span><br><span class="line">            result[content] = scores</span><br><span class="line">        result = sorted(result.items(), key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">        result = result[:top_num]</span><br><span class="line">        <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
-<h1 id="LDA算法"><a href="#LDA算法" class="headerlink" title="LDA算法"></a>LDA算法</h1><h2 id="（Latent-Dirichlet-Allocation）-潜在狄利克雷分布"><a href="#（Latent-Dirichlet-Allocation）-潜在狄利克雷分布" class="headerlink" title="（Latent Dirichlet Allocation）:潜在狄利克雷分布"></a>（Latent Dirichlet Allocation）:潜在狄利克雷分布</h2><ul>
-<li><p>它是一种无监督的贝叶斯模型。文档生成模型</p>
+<h1 id="lda算法"><a class="markdownIt-Anchor" href="#lda算法"></a> LDA算法</h1>
+<h2 id="latent-dirichlet-allocation潜在狄利克雷分布"><a class="markdownIt-Anchor" href="#latent-dirichlet-allocation潜在狄利克雷分布"></a> （Latent Dirichlet Allocation）:潜在狄利克雷分布</h2>
+<ul>
+<li>
+<p>它是一种无监督的贝叶斯模型。文档生成模型</p>
 </li>
-<li><p>认为一偏文档是有多个主题的，每个主题又对应着不同的词（这里可以理解为关键句）。一篇文档的构造过程，首先是一定的概率选择某个主题。 然后再在这个主题下以一定的概率选出某一个词，这样就生成了这篇文档的第一个词。不断重复这个过程，就生成了整篇文章 。（文档——主题——词）</p>
+<li>
+<p>认为一偏文档是有多个主题的，每个主题又对应着不同的词（这里可以理解为关键句）。一篇文档的构造过程，首先是一定的概率选择某个主题。 然后再在这个主题下以一定的概率选出某一个词，这样就生成了这篇文档的第一个词。不断重复这个过程，就生成了整篇文章 。（文档——主题——词）</p>
 </li>
 </ul>
 
@@ -451,7 +468,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#TextRank算法"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">TextRank算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#pagerank"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">pagerank</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#TextRank"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">TextRank</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#关于textrank算法在弹幕提取中的应用："><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">关于textrank算法在弹幕提取中的应用：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#TF-IDF算法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">TF-IDF算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#关于tf-idf在弹幕提取中的应用"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">关于tf-idf在弹幕提取中的应用</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#LDA算法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">LDA算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#（Latent-Dirichlet-Allocation）-潜在狄利克雷分布"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">（Latent Dirichlet Allocation）:潜在狄利克雷分布</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#textrank算法"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> TextRank算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#pagerank"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> pagerank</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#textrank"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> TextRank</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#关于textrank算法在弹幕提取中的应用"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text"> 关于textrank算法在弹幕提取中的应用：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#tf-idf算法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"> TF-IDF算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#关于tf-idf在弹幕提取中的应用"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text"> 关于tf-idf在弹幕提取中的应用</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#lda算法"><span class="toc-nav-number">3.</span> <span class="toc-nav-text"> LDA算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#latent-dirichlet-allocation潜在狄利克雷分布"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text"> （Latent Dirichlet Allocation）:潜在狄利克雷分布</span></a></li></ol></li></ol>
             
           
           </div>

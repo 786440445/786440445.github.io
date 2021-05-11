@@ -274,15 +274,19 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="C-FSMN"><a href="#C-FSMN" class="headerlink" title="C-FSMN"></a>C-FSMN</h1><h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><p><img src="/img/article/c-fsmn_1.png" alt=""></p>
-<h2 id="模型介绍"><a href="#模型介绍" class="headerlink" title="模型介绍"></a>模型介绍</h2><ol>
+                <h1 id="c-fsmn"><a class="markdownIt-Anchor" href="#c-fsmn"></a> C-FSMN</h1>
+<h2 id="模型结构"><a class="markdownIt-Anchor" href="#模型结构"></a> 模型结构</h2>
+<p><img src="/img/article/c-fsmn_1.png" alt="" /></p>
+<h2 id="模型介绍"><a class="markdownIt-Anchor" href="#模型介绍"></a> 模型介绍</h2>
+<ol>
 <li>FSMN相比于FNN，需要将记忆模块的输出作为下一个隐层的额外输入，这样就会引入额外的模型参数。隐层包含的节点越多，则引入的参数越多。</li>
 <li>我们通过结合矩阵低秩分解（Low-rank matrix factorization）的思路，提出了一种改进的FSMN结构，称之为简洁的FSMN（Compact FSMN，cFSMN）</li>
 <li>对于C-FSMN，通过在网络的隐层后添加一个低维度的线性投影层，并且将记忆模块添加在这些线性投影层上。即h(l, t)到p(l, t)经过一次线性变换。</li>
 <li>进一步的，cFSMN对记忆模块的编码公式进行了一些改变，通过将当前时刻的输出显式的添加到记忆模块的表达中，从而只需要将记忆模块的表达作为下一层的输入。这样可以有效的减少模型的参数量，加快网络的训练。</li>
 <li>下一层的结果h(l+1,t) = U’*P’(t)</li>
 </ol>
-<p>具体的，单向和双向的cFSMN记忆模块的公式表达分别如下：<br><img src="/img/article/c-fsmn_2.png" alt=""></p>
+<p>具体的，单向和双向的cFSMN记忆模块的公式表达分别如下：<br />
+<img src="/img/article/c-fsmn_2.png" alt="" /></p>
 
                 
                 <hr>
@@ -408,7 +412,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#C-FSMN"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">C-FSMN</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型结构"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">模型结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型介绍"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">模型介绍</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#c-fsmn"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> C-FSMN</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型结构"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> 模型结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型介绍"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> 模型介绍</span></a></li></ol></li></ol>
             
           
           </div>

@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">536</span> and
+                                Words <span class="post-count">546</span> and
                                 Reading Time <span class="post-count">2</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -274,42 +274,70 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="激励函数"><a href="#激励函数" class="headerlink" title="激励函数"></a>激励函数</h1><h2 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h2><p>函数为max(0, x)<br>是神经网络最常用的非线性函数<br>线形整流单元</p>
-<h2 id="ReLU6"><a href="#ReLU6" class="headerlink" title="ReLU6"></a>ReLU6</h2><p>函数为min(max(0, x), 6)<br>为了抵消ReLU的线形增长部分</p>
-<h2 id="sigmoid"><a href="#sigmoid" class="headerlink" title="sigmoid"></a>sigmoid</h2><p>函数为1/(1+exp(-x))<br>训练过程中反向传播项趋近于0，因此不怎么使用</p>
-<h2 id="tanh"><a href="#tanh" class="headerlink" title="tanh"></a>tanh</h2><p>双曲正切函数<br>与sigmoid类似，不同的是tanh的取值范围是0到1，sigmoid的取值凡事是-1到1<br>函数是((exp(x)-exp(-x))/(exp(x)+exp(-x)))</p>
-<h2 id="softsign"><a href="#softsign" class="headerlink" title="softsign"></a>softsign</h2><p>函数是x/(abs(x)+1), 符号连续估计</p>
-<h2 id="softplus"><a href="#softplus" class="headerlink" title="softplus"></a>softplus</h2><p>是ReLU激励函数的平滑版<br>函数为log(exp(x)+1)</p>
-<h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><p>与softplus类似<br>不同点在于当输入无限小时，ELU激励函数趋近于-1，而softplus趋近于0<br>表达式为(exp(x)+1) if x&lt;0 else x</p>
-<h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p><img src="/img/article/funclost.png" alt=""><br><img src="/img/article/funclost2.png" alt=""></p>
-<h2 id="L1损失函数"><a href="#L1损失函数" class="headerlink" title="L1损失函数"></a>L1损失函数</h2><p>即绝对损失函数</p>
-<h2 id="L2损失函数"><a href="#L2损失函数" class="headerlink" title="L2损失函数"></a>L2损失函数</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.l2_loss()</span><br></pre></td></tr></table></figure>
-<h2 id="Pseudo-Huber损失函数"><a href="#Pseudo-Huber损失函数" class="headerlink" title="Pseudo-Huber损失函数"></a>Pseudo-Huber损失函数</h2><pre><code class="lang-python">delta1 = tf.constant(0.25)
-phuber1_y_vals = tf.multiply(tf.square(delta1), tf.sqrt(1. + tf.square((target - x_vals)/delta1) - 1.))
+                <h1 id="激励函数"><a class="markdownIt-Anchor" href="#激励函数"></a> 激励函数</h1>
+<h2 id="relu"><a class="markdownIt-Anchor" href="#relu"></a> ReLU</h2>
+<p>函数为max(0, x)<br />
+是神经网络最常用的非线性函数<br />
+线形整流单元</p>
+<h2 id="relu6"><a class="markdownIt-Anchor" href="#relu6"></a> ReLU6</h2>
+<p>函数为min(max(0, x), 6)<br />
+为了抵消ReLU的线形增长部分</p>
+<h2 id="sigmoid"><a class="markdownIt-Anchor" href="#sigmoid"></a> sigmoid</h2>
+<p>函数为1/(1+exp(-x))<br />
+训练过程中反向传播项趋近于0，因此不怎么使用</p>
+<h2 id="tanh"><a class="markdownIt-Anchor" href="#tanh"></a> tanh</h2>
+<p>双曲正切函数<br />
+与sigmoid类似，不同的是tanh的取值范围是0到1，sigmoid的取值凡事是-1到1<br />
+函数是((exp(x)-exp(-x))/(exp(x)+exp(-x)))</p>
+<h2 id="softsign"><a class="markdownIt-Anchor" href="#softsign"></a> softsign</h2>
+<p>函数是x/(abs(x)+1), 符号连续估计</p>
+<h2 id="softplus"><a class="markdownIt-Anchor" href="#softplus"></a> softplus</h2>
+<p>是ReLU激励函数的平滑版<br />
+函数为log(exp(x)+1)</p>
+<h2 id="elu"><a class="markdownIt-Anchor" href="#elu"></a> ELU</h2>
+<p>与softplus类似<br />
+不同点在于当输入无限小时，ELU激励函数趋近于-1，而softplus趋近于0<br />
+表达式为(exp(x)+1) if x&lt;0 else x</p>
+<h1 id="损失函数"><a class="markdownIt-Anchor" href="#损失函数"></a> 损失函数</h1>
+<p><img src="/img/article/funclost.png" alt="" /><br />
+<img src="/img/article/funclost2.png" alt="" /></p>
+<h2 id="l1损失函数"><a class="markdownIt-Anchor" href="#l1损失函数"></a> L1损失函数</h2>
+<p>即绝对损失函数</p>
+<h2 id="l2损失函数"><a class="markdownIt-Anchor" href="#l2损失函数"></a> L2损失函数</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.nn.l2_loss()</span><br></pre></td></tr></table></figure>
+<h2 id="pseudo-huber损失函数"><a class="markdownIt-Anchor" href="#pseudo-huber损失函数"></a> Pseudo-Huber损失函数</h2>
+<pre class="highlight"><code class="python">delta1 = tf.constant(<span class="number">0.25</span>)
+phuber1_y_vals = tf.multiply(tf.square(delta1), tf.sqrt(<span class="number">1.</span> + tf.square((target - x_vals)/delta1) - <span class="number">1.</span>))
 phuber1_y_out = sess.run(phuber1_y_vals)
 </code></pre>
-<h2 id="Hinge损失函数"><a href="#Hinge损失函数" class="headerlink" title="Hinge损失函数"></a>Hinge损失函数</h2><p>主要用来估计支持向量机算法，但有时也用来估计神经网络算法。</p>
-<h2 id="两类交叉损失函数（cross-entropy）"><a href="#两类交叉损失函数（cross-entropy）" class="headerlink" title="两类交叉损失函数（cross-entropy）"></a>两类交叉损失函数（cross-entropy）</h2><p>作为逻辑损失函数，预测两类目标0或者1时，希望度量预测值到真实分类值（0或1）的距离</p>
-<pre><code class="lang-python">xentropy_y_vals = -tf.multiply(target, tf.log(x_vals)) - tf.multiply((1. - target), tf.log(1. - x_vals))
+<h2 id="hinge损失函数"><a class="markdownIt-Anchor" href="#hinge损失函数"></a> Hinge损失函数</h2>
+<p>主要用来估计支持向量机算法，但有时也用来估计神经网络算法。</p>
+<h2 id="两类交叉损失函数cross-entropy"><a class="markdownIt-Anchor" href="#两类交叉损失函数cross-entropy"></a> 两类交叉损失函数（cross-entropy）</h2>
+<p>作为逻辑损失函数，预测两类目标0或者1时，希望度量预测值到真实分类值（0或1）的距离</p>
+<pre class="highlight"><code class="python">xentropy_y_vals = -tf.multiply(target, tf.log(x_vals)) - tf.multiply((<span class="number">1.</span> - target), tf.log(<span class="number">1.</span> - x_vals))
 xentropy_y_out = sess.run(xentropy_y_vals)
 </code></pre>
-<h2 id="sigmoid交叉熵损失函数（sigmoid-cross-entropy）"><a href="#sigmoid交叉熵损失函数（sigmoid-cross-entropy）" class="headerlink" title="sigmoid交叉熵损失函数（sigmoid cross entropy）"></a>sigmoid交叉熵损失函数（sigmoid cross entropy）</h2><p>先把x_vals值通过sigmoid函数转换，再计算交叉熵</p>
-<pre><code class="lang-python">xentropy_sigmoid_y_vals = tf.nn.sigmoid_cross_entropy_with_logits(x_vals, targets)
+<h2 id="sigmoid交叉熵损失函数sigmoid-cross-entropy"><a class="markdownIt-Anchor" href="#sigmoid交叉熵损失函数sigmoid-cross-entropy"></a> sigmoid交叉熵损失函数（sigmoid cross entropy）</h2>
+<p>先把x_vals值通过sigmoid函数转换，再计算交叉熵</p>
+<pre class="highlight"><code class="python">xentropy_sigmoid_y_vals = tf.nn.sigmoid_cross_entropy_with_logits(x_vals, targets)
 xentropy_sigmoid_y_out = sess.run(xentropy_sigmoid_y_vals)
 </code></pre>
-<h2 id="加权交叉熵损失函数（Weighted-cross-entropy）"><a href="#加权交叉熵损失函数（Weighted-cross-entropy）" class="headerlink" title="加权交叉熵损失函数（Weighted cross-entropy）"></a>加权交叉熵损失函数（Weighted cross-entropy）</h2><pre><code class="lang-python">weight = tf.constant(0.5)
+<h2 id="加权交叉熵损失函数weighted-cross-entropy"><a class="markdownIt-Anchor" href="#加权交叉熵损失函数weighted-cross-entropy"></a> 加权交叉熵损失函数（Weighted cross-entropy）</h2>
+<pre class="highlight"><code class="python">weight = tf.constant(<span class="number">0.5</span>)
 xentropy_weighted_y_vals = tf.nn.weighted_cross_entropy_with_logits(x_vals, targets, weight)
 </code></pre>
-<h2 id="softmax交叉熵损失函数（softmax-cross-entropy）"><a href="#softmax交叉熵损失函数（softmax-cross-entropy）" class="headerlink" title="softmax交叉熵损失函数（softmax cross-entropy）"></a>softmax交叉熵损失函数（softmax cross-entropy）</h2><p>作用于非归一化的输出。通过softmax函数将输出结果转化成概率分布，然后计算真值概率分布损失</p>
-<pre><code class="lang-python">unscaled_logits = tf.constant([[1., -3., 10.]])
-target_dist = tf.constant([[0.1, 0.02, 0.88]])
+<h2 id="softmax交叉熵损失函数softmax-cross-entropy"><a class="markdownIt-Anchor" href="#softmax交叉熵损失函数softmax-cross-entropy"></a> softmax交叉熵损失函数（softmax cross-entropy）</h2>
+<p>作用于非归一化的输出。通过softmax函数将输出结果转化成概率分布，然后计算真值概率分布损失</p>
+<pre class="highlight"><code class="python">unscaled_logits = tf.constant([[<span class="number">1.</span>, <span class="number">-3.</span>, <span class="number">10.</span>]])
+target_dist = tf.constant([[<span class="number">0.1</span>, <span class="number">0.02</span>, <span class="number">0.88</span>]])
 softmax_xentropy = tf.nn.softmax_cross_entropy_with_logits(unscaled_logits, target_dist)
 </code></pre>
-<h2 id="稀疏softmax交叉熵损失函数，"><a href="#稀疏softmax交叉熵损失函数，" class="headerlink" title="稀疏softmax交叉熵损失函数，"></a>稀疏softmax交叉熵损失函数，</h2><p>和上一个类似，它把目标分类为true转化成index，而softmax交叉熵将目标转成概率分布</p>
-<pre><code class="lang-python">unscaled_logits = tf.constant([[1., -3., 10.]])
-sparse_target_dist = tf.constant([2])
+<h2 id="稀疏softmax交叉熵损失函数"><a class="markdownIt-Anchor" href="#稀疏softmax交叉熵损失函数"></a> 稀疏softmax交叉熵损失函数，</h2>
+<p>和上一个类似，它把目标分类为true转化成index，而softmax交叉熵将目标转成概率分布</p>
+<pre class="highlight"><code class="python">unscaled_logits = tf.constant([[<span class="number">1.</span>, <span class="number">-3.</span>, <span class="number">10.</span>]])
+sparse_target_dist = tf.constant([<span class="number">2</span>])
 sparse_xentropy = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=sparse_target_dist, logits=unscaled_logits)
-# print(sess.run(sparse_xentropy))
+<span class="comment"># print(sess.run(sparse_xentropy))</span>
 </code></pre>
 
                 
@@ -436,7 +464,7 @@ sparse_xentropy = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=sparse_t
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#激励函数"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">激励函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ReLU"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">ReLU</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ReLU6"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">ReLU6</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#sigmoid"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">sigmoid</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tanh"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">tanh</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#softsign"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">softsign</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#softplus"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">softplus</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ELU"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">ELU</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#损失函数"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">损失函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#L1损失函数"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">L1损失函数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#L2损失函数"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">L2损失函数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Pseudo-Huber损失函数"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Pseudo-Huber损失函数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Hinge损失函数"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Hinge损失函数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#两类交叉损失函数（cross-entropy）"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">两类交叉损失函数（cross-entropy）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#sigmoid交叉熵损失函数（sigmoid-cross-entropy）"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">sigmoid交叉熵损失函数（sigmoid cross entropy）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#加权交叉熵损失函数（Weighted-cross-entropy）"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">加权交叉熵损失函数（Weighted cross-entropy）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#softmax交叉熵损失函数（softmax-cross-entropy）"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">softmax交叉熵损失函数（softmax cross-entropy）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#稀疏softmax交叉熵损失函数，"><span class="toc-nav-number">2.9.</span> <span class="toc-nav-text">稀疏softmax交叉熵损失函数，</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#激励函数"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> 激励函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#relu"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> ReLU</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#relu6"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> ReLU6</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#sigmoid"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text"> sigmoid</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tanh"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text"> tanh</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#softsign"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text"> softsign</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#softplus"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text"> softplus</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#elu"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text"> ELU</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#损失函数"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"> 损失函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#l1损失函数"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text"> L1损失函数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#l2损失函数"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text"> L2损失函数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#pseudo-huber损失函数"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text"> Pseudo-Huber损失函数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#hinge损失函数"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text"> Hinge损失函数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#两类交叉损失函数cross-entropy"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text"> 两类交叉损失函数（cross-entropy）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#sigmoid交叉熵损失函数sigmoid-cross-entropy"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text"> sigmoid交叉熵损失函数（sigmoid cross entropy）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#加权交叉熵损失函数weighted-cross-entropy"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text"> 加权交叉熵损失函数（Weighted cross-entropy）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#softmax交叉熵损失函数softmax-cross-entropy"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text"> softmax交叉熵损失函数（softmax cross-entropy）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#稀疏softmax交叉熵损失函数"><span class="toc-nav-number">2.9.</span> <span class="toc-nav-text"> 稀疏softmax交叉熵损失函数，</span></a></li></ol></li></ol>
             
           
           </div>
