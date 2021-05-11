@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">713</span> and
+                                Words <span class="post-count">690</span> and
                                 Reading Time <span class="post-count">2</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,13 +187,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -202,6 +195,13 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,55 +274,38 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="文本相似度"><a class="markdownIt-Anchor" href="#文本相似度"></a> 文本相似度</h2>
-<p>​	在自然语言处理(Natural Language Processing, NLP)中，经常会涉及到如何度量两个文本的相似度问题。在诸如对话系统(Dialog system)和信息检索(Information retrieval)等的问题中，如何度量句子或者短语之间的相似度尤为重要。</p>
-<h3 id="1基于关键词匹配的传统方法"><a class="markdownIt-Anchor" href="#1基于关键词匹配的传统方法"></a> 1.基于关键词匹配的传统方法</h3>
-<h4 id="11-n-gram相似度"><a class="markdownIt-Anchor" href="#11-n-gram相似度"></a> 1.1 n-gram相似度</h4>
-<ul>
+                <h2 id="文本相似度"><a href="#文本相似度" class="headerlink" title="文本相似度"></a>文本相似度</h2><p>​    在自然语言处理(Natural Language Processing, NLP)中，经常会涉及到如何度量两个文本的相似度问题。在诸如对话系统(Dialog system)和信息检索(Information retrieval)等的问题中，如何度量句子或者短语之间的相似度尤为重要。</p>
+<h3 id="1-基于关键词匹配的传统方法"><a href="#1-基于关键词匹配的传统方法" class="headerlink" title="1.基于关键词匹配的传统方法"></a>1.基于关键词匹配的传统方法</h3><h4 id="1-1-n-gram相似度"><a href="#1-1-n-gram相似度" class="headerlink" title="1.1 n-gram相似度"></a>1.1 n-gram相似度</h4><ul>
 <li>基于N-Gram模型定义的句子（字符串）相似度是一种模糊匹配方式，通过两个长得很像的句子间的“差异”来衡量相似度。</li>
 <li>N-Gram相似度的计算是指按长度N切分原句得到词段，也就是原句中所有长度为N的子字符串。对于两个句子S和T，则可以从共有子串的数量上去定义两个句子的相似度。</li>
 </ul>
-Similarity=|G_{N}(S)|+|G_{N}(T)|−2∗|G_{N}(S)∩G_{N}(T)|
-
-<ul>
+<script type="math/tex; mode=display">
+Similarity=|G_{N}(S)|+|G_{N}(T)|−2∗|G_{N}(S)∩G_{N}(T)|</script><ul>
 <li>其中，GN(S)GN(S)和GN(T)GN(T)分别表示字符串S和T中N-Gram的集合，N一般取2或3。字符串距离越近，它们就越相似，当两个字符串完全相等时，距离为0。</li>
 </ul>
-<h4 id="12-jaccard相似度"><a class="markdownIt-Anchor" href="#12-jaccard相似度"></a> 1.2 Jaccard相似度</h4>
-<ul>
-<li>Jaccard相似度的计算相对简单，原理也容易理解。就是计算两个句子之间词集合的交集和并集的比值。该值越大，表示两个句子越相似，在涉及大规模并行运算的时候，该方法在效率上有一定的优势，公式如下：J(A,B)=\frac{|A∩B|}{|A∪B|}
-
-</li>
+<h4 id="1-2-Jaccard相似度"><a href="#1-2-Jaccard相似度" class="headerlink" title="1.2 Jaccard相似度"></a>1.2 Jaccard相似度</h4><ul>
+<li>Jaccard相似度的计算相对简单，原理也容易理解。就是计算两个句子之间词集合的交集和并集的比值。该值越大，表示两个句子越相似，在涉及大规模并行运算的时候，该方法在效率上有一定的优势，公式如下：<script type="math/tex; mode=display">
+J(A,B)=\frac{|A∩B|}{|A∪B|}</script></li>
 </ul>
-<h3 id="2基于向量空间"><a class="markdownIt-Anchor" href="#2基于向量空间"></a> 2.基于向量空间</h3>
-<p>将文本映射到向量空间，利用余弦相似度等方法:<strong>Distributed representation</strong></p>
-<h4 id="21-word2vec"><a class="markdownIt-Anchor" href="#21-word2vec"></a> 2.1 word2vec:</h4>
-<ul>
+<h3 id="2-基于向量空间"><a href="#2-基于向量空间" class="headerlink" title="2.基于向量空间"></a>2.基于向量空间</h3><p>将文本映射到向量空间，利用余弦相似度等方法:<strong>Distributed representation</strong></p>
+<h4 id="2-1-word2vec"><a href="#2-1-word2vec" class="headerlink" title="2.1 word2vec:"></a>2.1 word2vec:</h4><ul>
 <li>编码到向量空间，求其余弦距离。</li>
 </ul>
-<h4 id="22-tf-idf"><a class="markdownIt-Anchor" href="#22-tf-idf"></a> 2.2 TF-IDF：</h4>
-<ul>
+<h4 id="2-2-TF-IDF："><a href="#2-2-TF-IDF：" class="headerlink" title="2.2 TF-IDF："></a>2.2 TF-IDF：</h4><ul>
 <li>通过计算出文档中每个词的TF-IDF值，然后结合相似度计算方法（一般采用余弦相似度）就可以计算两个文档的相似度。采用TF-IDF的前提是“文章的词语重要性与词语在文章中出现的位置不相关”。</li>
 </ul>
-<h4 id="23-计算距离"><a class="markdownIt-Anchor" href="#23-计算距离"></a> 2.3 计算距离</h4>
-<ol>
-<li>
-<p><strong>欧式距离</strong></p>
-d=\sqrt{\sum_{i=1}^{n}(xi−yi)2}
-
-</li>
-<li>
-<p><strong>曼哈顿距离</strong></p>
-d=\sum_{i=1}^{n}|xi−yi|
-
-</li>
-<li>
-<p><strong>余弦相似度</strong></p>
-<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mo>=</mo><mfrac><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></msubsup><mi>x</mi><mi>i</mi><mo>∗</mo><mi>y</mi><mi>i</mi></mrow><mrow><msqrt><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></msubsup><mi>x</mi><msup><mi>i</mi><mn>2</mn></msup><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>n</mi></mrow></msubsup><mi>y</mi><msup><mi>i</mi><mn>2</mn></msup></mrow></msqrt></mrow></mfrac></mrow><annotation encoding="application/x-tex">d=\frac{\sum_{i=1}^{n}xi*yi}{\sqrt{\sum_{i=1}^{n}xi^2\sum_{i=1}^{n}yi^2}}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.44001em;"></span><span class="strut bottom" style="height:2.5700199999999995em;vertical-align:-1.1300099999999997em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord mathit">d</span><span class="mrel">=</span><span class="mord reset-textstyle displaystyle textstyle uncramped"><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.7999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="reset-textstyle textstyle cramped"><span class="mord textstyle cramped"><span class="sqrt mord"><span class="sqrt-sign" style="top:-0.02000000000000013em;"><span class="style-wrap reset-textstyle textstyle uncramped"><span class="delimsizing size1">√</span></span></span><span class="vlist"><span style="top:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="mord textstyle cramped"><span class="mop"><span class="op-symbol small-op mop" style="top:-0.0000050000000000050004em;">∑</span><span class="vlist"><span style="top:0.30001em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">i</span><span class="mrel">=</span><span class="mord mathrm">1</span></span></span></span><span style="top:-0.364em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">n</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">x</span><span class="mord"><span class="mord mathit">i</span><span class="vlist"><span style="top:-0.289em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mop"><span class="op-symbol small-op mop" style="top:-0.0000050000000000050004em;">∑</span><span class="vlist"><span style="top:0.30001em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">i</span><span class="mrel">=</span><span class="mord mathrm">1</span></span></span></span><span style="top:-0.364em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">n</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord"><span class="mord mathit">i</span><span class="vlist"><span style="top:-0.289em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathrm">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span><span style="top:-0.8299999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="reset-textstyle textstyle uncramped sqrt-line"></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span>​</span></span></span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.69001em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span><span class="reset-textstyle textstyle uncramped"><span class="mord textstyle uncramped"><span class="mop"><span class="op-symbol small-op mop" style="top:-0.0000050000000000050004em;">∑</span><span class="vlist"><span style="top:0.30001em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord scriptstyle cramped"><span class="mord mathit">i</span><span class="mrel">=</span><span class="mord mathrm">1</span></span></span></span><span style="top:-0.364em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord scriptstyle uncramped"><span class="mord mathit">n</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit">x</span><span class="mord mathit">i</span><span class="mbin">∗</span><span class="mord mathit" style="margin-right:0.03588em;">y</span><span class="mord mathit">i</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:1em;">​</span></span>​</span></span></span><span class="sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span></span></p>
-</li>
+<h4 id="2-3-计算距离"><a href="#2-3-计算距离" class="headerlink" title="2.3 计算距离"></a>2.3 计算距离</h4><ol>
+<li><p><strong>欧式距离</strong></p>
+<script type="math/tex; mode=display">
+d=\sqrt{\sum_{i=1}^{n}(xi−yi)2}</script></li>
+<li><p><strong>曼哈顿距离</strong></p>
+<script type="math/tex; mode=display">
+d=\sum_{i=1}^{n}|xi−yi|</script></li>
+<li><p><strong>余弦相似度</strong></p>
+<script type="math/tex; mode=display">
+d=\frac{\sum_{i=1}^{n}xi*yi}{\sqrt{\sum_{i=1}^{n}xi^2\sum_{i=1}^{n}yi^2}}</script></li>
 </ol>
-<h3 id="3基于深度学习"><a class="markdownIt-Anchor" href="#3基于深度学习"></a> 3.基于深度学习</h3>
-<p>​	随着深度学习在图像和语音识别中取得不错的进展，近些年深度学习也开始应用于自然语言处理的不同应用中。语义相似性匹配问题已经逐渐从人工设计特征转向分布式表达和神经网络结构相结合的方式</p>
+<h3 id="3-基于深度学习"><a href="#3-基于深度学习" class="headerlink" title="3.基于深度学习"></a>3.基于深度学习</h3><p>​    随着深度学习在图像和语音识别中取得不错的进展，近些年深度学习也开始应用于自然语言处理的不同应用中。语义相似性匹配问题已经逐渐从人工设计特征转向分布式表达和神经网络结构相结合的方式</p>
 <ul>
 <li>利用深度网络学习语义匹配模型：</li>
 <li>DSSM，ConvNet，SiameseLSTM</li>
@@ -454,7 +437,7 @@ d=\sum_{i=1}^{n}|xi−yi|
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#文本相似度"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> 文本相似度</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1基于关键词匹配的传统方法"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> 1.基于关键词匹配的传统方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#11-n-gram相似度"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text"> 1.1 n-gram相似度</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#12-jaccard相似度"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text"> 1.2 Jaccard相似度</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2基于向量空间"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> 2.基于向量空间</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#21-word2vec"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text"> 2.1 word2vec:</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#22-tf-idf"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text"> 2.2 TF-IDF：</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#23-计算距离"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text"> 2.3 计算距离</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3基于深度学习"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text"> 3.基于深度学习</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#文本相似度"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">文本相似度</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-基于关键词匹配的传统方法"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1.基于关键词匹配的传统方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-1-n-gram相似度"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">1.1 n-gram相似度</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-2-Jaccard相似度"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">1.2 Jaccard相似度</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-基于向量空间"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2.基于向量空间</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-1-word2vec"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">2.1 word2vec:</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-2-TF-IDF："><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2.2 TF-IDF：</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-3-计算距离"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">2.3 计算距离</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-基于深度学习"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">3.基于深度学习</span></a></li></ol></li></ol>
             
           
           </div>

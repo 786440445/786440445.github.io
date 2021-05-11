@@ -125,8 +125,8 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">873</span> and
-                                Reading Time <span class="post-count">4</span> Minutes
+                                Words <span class="post-count">862</span> and
+                                Reading Time <span class="post-count">3</span> Minutes
                             </span>
                             <div class="blank_box"></div>
                             <!-- 不蒜子统计 start -->
@@ -187,13 +187,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -202,6 +195,13 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,44 +274,18 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="lenet5介绍"><a class="markdownIt-Anchor" href="#lenet5介绍"></a> LeNet5介绍</h1>
-<p>LeNet-5：是Yann LeCun在1998年设计的用于手写数字识别的卷积神经网络，当年美国大多数银行就是用它来识别支票上面的手写数字的，它是早期卷积神经网络中最有代表性的实验系统之一。<br />
-LenNet-5共有7层（不包括输入层），每层都包含不同数量的训练参数，如下图所示。<br />
-<img src="/img/acticle/lenet5_model.png" alt="" /><br />
-LeNet-5中主要有2个卷积层、2个下抽样层（池化层）、3个全连接层3种连接方式</p>
-<h1 id="构建mnist识别lenet5模型"><a class="markdownIt-Anchor" href="#构建mnist识别lenet5模型"></a> 构建MNIST识别LeNet5模型</h1>
-<h2 id="输入数据为mnist_data数据"><a class="markdownIt-Anchor" href="#输入数据为mnist_data数据"></a> 输入数据为MNIST_DATA数据</h2>
-<p>input_tensor.shape = [BATCH_SIZE, IMAGE_SIZE, IMAGE_SIZE, NUMBER_CHANNELS]<br />
-[BATCH_SIZE, 28, 28, 1]</p>
-<h2 id="卷积层-1"><a class="markdownIt-Anchor" href="#卷积层-1"></a> 卷积层-1</h2>
-<p>weight = [CONV1_SIZE, CONV1_SIZE, NUM_CHANNELS, CONV1_DEEP] = [5, 5, 1, 32]<br />
-CONV1_SIZE代表卷积过滤器大小<br />
-NUM_CHANNELS代表通道数<br />
-CONV1_DEEP代表过滤器深度<br />
-conv1_biases=[CONV1_DEEP]<br />
-输出层结点矩阵为为[BATCH_SIZE, 24, 24, 32]</p>
-<h2 id="池化层-1"><a class="markdownIt-Anchor" href="#池化层-1"></a> 池化层-1</h2>
-<p>ksize=[1, 2, 2, 1]<br />
-strides=[1, 2, 2, 1]<br />
-池化层过滤器大小为2，步长为2<br />
-则输出层结点矩阵为[BATCH_SIZE, 12, 12, 32]</p>
-<h2 id="卷积层-2"><a class="markdownIt-Anchor" href="#卷积层-2"></a> 卷积层-2</h2>
-<p>weights = [CONV2_SIZE, CONV2_SIZE, CONV1_DEEP, CONV2_DEEP] = [5, 5, 1, 64]<br />
-输出层结点矩阵为[BATCH_SIZE, 8, 8, 64]</p>
-<h2 id="池化层-2"><a class="markdownIt-Anchor" href="#池化层-2"></a> 池化层-2</h2>
-<p>ksize=[1, 2, 2, 1]<br />
-strides=[1, 2, 2, 1]<br />
-输出层结点矩阵为[BATCH_SIZE, 4, 4, 64]</p>
-<h2 id="拉直操作"><a class="markdownIt-Anchor" href="#拉直操作"></a> 拉直操作</h2>
-<p>输出层为[BATCH_SIZE, 16 x 64]</p>
-<h2 id="全链接-1"><a class="markdownIt-Anchor" href="#全链接-1"></a> 全链接-1</h2>
-<p>输入[BATCH_SIZE, 1024], weight = [1024, 512]</p>
-<h2 id="全链接-2"><a class="markdownIt-Anchor" href="#全链接-2"></a> 全链接-2</h2>
-<p>输入[BATCH_SIZE, 512], weight = [1024, 10]</p>
+                <h1 id="LeNet5介绍"><a href="#LeNet5介绍" class="headerlink" title="LeNet5介绍"></a>LeNet5介绍</h1><p>LeNet-5：是Yann LeCun在1998年设计的用于手写数字识别的卷积神经网络，当年美国大多数银行就是用它来识别支票上面的手写数字的，它是早期卷积神经网络中最有代表性的实验系统之一。<br>LenNet-5共有7层（不包括输入层），每层都包含不同数量的训练参数，如下图所示。<br><img src="/img/acticle/lenet5_model.png" alt=""><br>LeNet-5中主要有2个卷积层、2个下抽样层（池化层）、3个全连接层3种连接方式</p>
+<h1 id="构建MNIST识别LeNet5模型"><a href="#构建MNIST识别LeNet5模型" class="headerlink" title="构建MNIST识别LeNet5模型"></a>构建MNIST识别LeNet5模型</h1><h2 id="输入数据为MNIST-DATA数据"><a href="#输入数据为MNIST-DATA数据" class="headerlink" title="输入数据为MNIST_DATA数据"></a>输入数据为MNIST_DATA数据</h2><p>input_tensor.shape = [BATCH_SIZE, IMAGE_SIZE, IMAGE_SIZE, NUMBER_CHANNELS]<br>[BATCH_SIZE, 28, 28, 1]</p>
+<h2 id="卷积层-1"><a href="#卷积层-1" class="headerlink" title="卷积层-1"></a>卷积层-1</h2><p>weight = [CONV1_SIZE, CONV1_SIZE, NUM_CHANNELS, CONV1_DEEP] = [5, 5, 1, 32]<br>CONV1_SIZE代表卷积过滤器大小<br>NUM_CHANNELS代表通道数<br>CONV1_DEEP代表过滤器深度<br>conv1_biases=[CONV1_DEEP]<br>输出层结点矩阵为为[BATCH_SIZE, 24, 24, 32]</p>
+<h2 id="池化层-1"><a href="#池化层-1" class="headerlink" title="池化层-1"></a>池化层-1</h2><p>ksize=[1, 2, 2, 1]<br>strides=[1, 2, 2, 1]<br>池化层过滤器大小为2，步长为2<br>则输出层结点矩阵为[BATCH_SIZE, 12, 12, 32]</p>
+<h2 id="卷积层-2"><a href="#卷积层-2" class="headerlink" title="卷积层-2"></a>卷积层-2</h2><p>weights = [CONV2_SIZE, CONV2_SIZE, CONV1_DEEP, CONV2_DEEP] = [5, 5, 1, 64]<br>输出层结点矩阵为[BATCH_SIZE, 8, 8, 64]</p>
+<h2 id="池化层-2"><a href="#池化层-2" class="headerlink" title="池化层-2"></a>池化层-2</h2><p>ksize=[1, 2, 2, 1]<br>strides=[1, 2, 2, 1]<br>输出层结点矩阵为[BATCH_SIZE, 4, 4, 64]</p>
+<h2 id="拉直操作"><a href="#拉直操作" class="headerlink" title="拉直操作"></a>拉直操作</h2><p>输出层为[BATCH_SIZE, 16 x 64]</p>
+<h2 id="全链接-1"><a href="#全链接-1" class="headerlink" title="全链接-1"></a>全链接-1</h2><p>输入[BATCH_SIZE, 1024], weight = [1024, 512]</p>
+<h2 id="全链接-2"><a href="#全链接-2" class="headerlink" title="全链接-2"></a>全链接-2</h2><p>输入[BATCH_SIZE, 512], weight = [1024, 10]</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置参数</span></span><br><span class="line">INPUT_NODE = <span class="number">784</span></span><br><span class="line">OUTPUT_NODE = <span class="number">10</span></span><br><span class="line">IMAGE_SIZE = <span class="number">28</span></span><br><span class="line">NUM_CHANNELS = <span class="number">1</span></span><br><span class="line">NUM_LABELS = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一层卷积层的尺寸和深度</span></span><br><span class="line">CONV1_DEEP = <span class="number">32</span></span><br><span class="line">CONV1_SIZE = <span class="number">5</span></span><br><span class="line"><span class="comment"># 第二层卷积层的尺寸和深度</span></span><br><span class="line">CONV2_DEEP = <span class="number">64</span></span><br><span class="line">CONV2_SIZE = <span class="number">5</span></span><br><span class="line"><span class="comment"># 全链接层的结点个数</span></span><br><span class="line">FC_SIZE = <span class="number">512</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inference</span><span class="params">(input_tensor, train, regularizer)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">'layer1-conv1'</span>):</span><br><span class="line">        conv1_weights = tf.get_variable(<span class="string">"weight"</span>, [CONV1_SIZE, CONV1_SIZE, NUM_CHANNELS, CONV1_DEEP],</span><br><span class="line">                                        initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.1</span>))</span><br><span class="line">        conv1_biases = tf.get_variable(<span class="string">"biases"</span>, [CONV1_DEEP])</span><br><span class="line"></span><br><span class="line">        conv1 = tf.nn.conv2d(input_tensor, conv1_weights, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line">        relu1 = tf.nn.relu(tf.nn.bias_add(conv1, conv1_biases))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">'layer2-pool1'</span>):</span><br><span class="line">        pool1 = tf.nn.max_pool(relu1, ksize=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], strides=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">'layer3-conv2'</span>):</span><br><span class="line">        conv2_weights = tf.get_variable(<span class="string">"weight"</span>, [CONV2_SIZE, CONV2_SIZE, CONV1_DEEP, CONV2_DEEP],</span><br><span class="line">                                        initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.1</span>))</span><br><span class="line">        conv2_biases = tf.get_variable(<span class="string">"biases"</span>, [CONV2_DEEP])</span><br><span class="line"></span><br><span class="line">        conv2 = tf.nn.conv2d(pool1, conv2_weights, strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line">        relu2 = tf.nn.relu(tf.nn.bias_add(conv2, conv2_biases))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'layer4-pool2'</span>):</span><br><span class="line">        pool2 = tf.nn.max_pool(relu2, ksize=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], strides=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>], padding=<span class="string">'SAME'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将矩阵拉直成向量，pool_shape[0]为BATCH_SIZE的大小</span></span><br><span class="line">    pool_shape = pool2.get_shape().as_list()</span><br><span class="line">    nodes = pool_shape[<span class="number">1</span>] * pool_shape[<span class="number">2</span>] * pool_shape[<span class="number">3</span>]</span><br><span class="line">    reshaped = tf.reshape(pool2, [pool_shape[<span class="number">0</span>], nodes])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">'layer5-fc1'</span>):</span><br><span class="line">        fc1_weights = tf.get_variable(<span class="string">"weight"</span>, [nodes, FC_SIZE],</span><br><span class="line">                                      initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.1</span>))</span><br><span class="line">        <span class="keyword">if</span> regularizer != <span class="literal">None</span>:</span><br><span class="line">            tf.add_to_collection(<span class="string">'losses'</span>, regularizer(fc1_weights))</span><br><span class="line">        fc1_biases = tf.get_variable(<span class="string">"biases"</span>, [FC_SIZE],</span><br><span class="line">                                     initializer=tf.constant_initializer(<span class="number">0.1</span>))</span><br><span class="line">        fc1 = tf.nn.relu(tf.matmul(reshaped, fc1_weights), fc1_biases)</span><br><span class="line">        <span class="comment"># dropout可以避免过拟合，使得在测试数据上效果更好，一般用于全链接层</span></span><br><span class="line">        <span class="keyword">if</span> train:</span><br><span class="line">            fc1 = tf.nn.dropout(fc1, <span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tf.variable_scope(<span class="string">'layer6-fc2'</span>):</span><br><span class="line">        fc2_weights = tf.get_variable(<span class="string">"weight"</span>, [FC_SIZE, NUM_LABELS],</span><br><span class="line">                                      initializer=tf.truncated_normal_initializer(stddev=<span class="number">0.1</span>))</span><br><span class="line">        <span class="keyword">if</span> regularizer != <span class="literal">None</span>:</span><br><span class="line">            tf.add_to_collection(<span class="string">'losses'</span>, regularizer(fc2_weights))</span><br><span class="line">        fc2_biases = tf.get_variable(<span class="string">"biases"</span>, [NUM_LABELS],</span><br><span class="line">                                     initializer=tf.constant_initializer(<span class="number">0.1</span>))</span><br><span class="line">        logit = tf.matmul(fc1, fc2_weights) + fc2_biases</span><br><span class="line">    <span class="keyword">return</span> logit</span><br></pre></td></tr></table></figure>
-<h1 id="lanet-5的局限性"><a class="markdownIt-Anchor" href="#lanet-5的局限性"></a> LaNet-5的局限性</h1>
-<p>CNN能够得出原始图像的有效表征，这使得CNN能够直接从原始像素中，经过极少的预处理，识别视觉上面的规律。然而，由于当时缺乏大规模训练数据，计算机的计算能力也跟不上，LeNet-5 对于复杂问题的处理结果并不理想。</p>
-<p>2006年起，人们设计了很多方法，想要克服难以训练深度CNN的困难。其中，最著名的是 Krizhevsky et al.提出了一个经典的CNN 结构，并在图像识别任务上取得了重大突破。其方法的整体框架叫做 AlexNet，与 LeNet-5 类似，但要更加深一些。</p>
+<h1 id="LaNet-5的局限性"><a href="#LaNet-5的局限性" class="headerlink" title="LaNet-5的局限性"></a>LaNet-5的局限性</h1><p>CNN能够得出原始图像的有效表征，这使得CNN能够直接从原始像素中，经过极少的预处理，识别视觉上面的规律。然而，由于当时缺乏大规模训练数据，计算机的计算能力也跟不上，LeNet-5 对于复杂问题的处理结果并不理想。</p>
+<p>2006年起，人们设计了很多方法，想要克服难以训练深度CNN的困难。其中，最著名的是 Krizhevsky et al.提出了一个经典的CNN 结构，并在图像识别任务上取得了重大突破。其方法的整体框架叫做 AlexNet，与 LeNet-5 类似，但要更加深一些。 </p>
 
                 
                 <hr>
@@ -437,7 +411,7 @@ strides=[1, 2, 2, 1]<br />
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#lenet5介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> LeNet5介绍</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#构建mnist识别lenet5模型"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"> 构建MNIST识别LeNet5模型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#输入数据为mnist_data数据"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text"> 输入数据为MNIST_DATA数据</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#卷积层-1"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text"> 卷积层-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#池化层-1"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text"> 池化层-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#卷积层-2"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text"> 卷积层-2</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#池化层-2"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text"> 池化层-2</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#拉直操作"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text"> 拉直操作</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#全链接-1"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text"> 全链接-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#全链接-2"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text"> 全链接-2</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#lanet-5的局限性"><span class="toc-nav-number">3.</span> <span class="toc-nav-text"> LaNet-5的局限性</span></a></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#LeNet5介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">LeNet5介绍</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#构建MNIST识别LeNet5模型"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">构建MNIST识别LeNet5模型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#输入数据为MNIST-DATA数据"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">输入数据为MNIST_DATA数据</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#卷积层-1"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">卷积层-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#池化层-1"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">池化层-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#卷积层-2"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">卷积层-2</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#池化层-2"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">池化层-2</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#拉直操作"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">拉直操作</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#全链接-1"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">全链接-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#全链接-2"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">全链接-2</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#LaNet-5的局限性"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">LaNet-5的局限性</span></a></li></ol>
             
           
           </div>

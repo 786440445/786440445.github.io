@@ -164,13 +164,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -179,6 +172,13 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -251,6 +251,8 @@
                 
                     <a href="#机器学习" title="机器学习" rel="3">机器学习</a>
                 
+                    <a href="#deep_learning" title="deep_learning" rel="1">deep_learning</a>
+                
                     <a href="#语音识别" title="语音识别" rel="4">语音识别</a>
                 
                     <a href="#自然语言处理" title="自然语言处理" rel="3">自然语言处理</a>
@@ -264,8 +266,6 @@
                     <a href="#CNN" title="CNN" rel="1">CNN</a>
                 
                     <a href="#正则化" title="正则化" rel="1">正则化</a>
-                
-                    <a href="#deep_learning" title="deep_learning" rel="1">deep_learning</a>
                 
                     <a href="#文本匹配" title="文本匹配" rel="3">文本匹配</a>
                 
@@ -312,13 +312,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2019/12/05/boosting/">
+                     <a href="/2019/12/05/TextClassify/">
                         <h2 class="post-title">
-                            boosting
+                            TextClassify
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                Boosting模型
+                                文本分类，关键词提取
                             </h3>
                         
                     </a>
@@ -331,13 +331,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2019/12/05/TextClassify/">
+                     <a href="/2019/12/05/boosting/">
                         <h2 class="post-title">
-                            TextClassify
+                            boosting
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                文本分类，关键词提取
+                                Boosting模型
                             </h3>
                         
                     </a>
@@ -367,8 +367,8 @@
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="语音识别">
-                    <span class="tag-text">语音识别</span>
+                <span class="fa fa-tag listing-seperator" id="deep_learning">
+                    <span class="tag-text">deep_learning</span>
                 </span>
                 
                   <!-- <li class="listing-item">
@@ -376,19 +376,26 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2019/07/10/d-fsmn-model/">
+                     <a href="/2019/06/06/deep-learning-optimizer/">
                         <h2 class="post-title">
-                            Deep-FSMN
+                            常见的深度学习优化方法
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                阿里开源语音识别模型
+                                优化方法
                             </h3>
                         
                     </a>
                     <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
                 </div>
                 <hr>
+                
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="语音识别">
+                    <span class="tag-text">语音识别</span>
+                </span>
                 
                   <!-- <li class="listing-item">
                   <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
@@ -421,6 +428,25 @@
                         
                             <h3 class="post-subtitle">
                                 科大讯飞模型
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2019/07/10/d-fsmn-model/">
+                        <h2 class="post-title">
+                            Deep-FSMN
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                阿里开源语音识别模型
                             </h3>
                         
                     </a>
@@ -689,6 +715,44 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
+                     <a href="/2019/05/06/tensorflow-multy-classify-svm/">
+                        <h2 class="post-title">
+                            tensorflow之实现多分类SVM
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                多分类SVM
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2019/05/09/tensorflow-mutiply-layer/">
+                        <h2 class="post-title">
+                            tensorflow之实现神经网络常见层
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                卷积，池化，激活，全链接
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
                      <a href="/2019/05/13/tensorflow-saver/">
                         <h2 class="post-title">
                             tensorflow模型持久化
@@ -746,44 +810,6 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2019/05/09/tensorflow-mutiply-layer/">
-                        <h2 class="post-title">
-                            tensorflow之实现神经网络常见层
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                卷积，池化，激活，全链接
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2019/05/06/tensorflow-multy-classify-svm/">
-                        <h2 class="post-title">
-                            tensorflow之实现多分类SVM
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                多分类SVM
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
                      <a href="/2019/05/06/tensorflow-svm-with-kernel/">
                         <h2 class="post-title">
                             tensorflow之核函数SVM
@@ -803,13 +829,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2019/05/05/tensorflow-svr/">
+                     <a href="/2019/05/05/tensorflow-svm01/">
                         <h2 class="post-title">
-                            tensorflow之支持向量回归
+                            tensorflow之软支持向量机
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                SVR
+                                软支持向量机
                             </h3>
                         
                     </a>
@@ -822,13 +848,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2019/05/05/tensorflow-svm01/">
+                     <a href="/2019/05/05/tensorflow-svr/">
                         <h2 class="post-title">
-                            tensorflow之软支持向量机
+                            tensorflow之支持向量回归
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                软支持向量机
+                                SVR
                             </h3>
                         
                     </a>
@@ -898,6 +924,25 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
+                     <a href="/2019/04/26/tensorflow-activate-lost/">
+                        <h2 class="post-title">
+                            tensorflow之激励函数和损失函数
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                神经网络
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
                      <a href="/2019/04/26/tensorflow-bp-method/">
                         <h2 class="post-title">
                             tensorflow之实现反向传播
@@ -924,25 +969,6 @@
                         
                             <h3 class="post-subtitle">
                                 回归分类算法评估
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2019/04/26/tensorflow-activate-lost/">
-                        <h2 class="post-title">
-                            tensorflow之激励函数和损失函数
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                神经网络
                             </h3>
                         
                     </a>
@@ -1033,32 +1059,6 @@
                         
                             <h3 class="post-subtitle">
                                 神经网络中L2的计算
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="deep_learning">
-                    <span class="tag-text">deep_learning</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/2019/06/06/deep-learning-optimizer/">
-                        <h2 class="post-title">
-                            常见的深度学习优化方法
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                优化方法
                             </h3>
                         
                     </a>

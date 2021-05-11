@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">246</span> and
+                                Words <span class="post-count">245</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,13 +187,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -202,6 +195,13 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,15 +274,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="解析"><a class="markdownIt-Anchor" href="#解析"></a> 解析</h1>
-<h2 id="集合"><a class="markdownIt-Anchor" href="#集合"></a> 集合</h2>
-<p>tf.add_to_collection(‘losses’, num)<br />
-将num收集到collection中，<br />
-tf.get_collection可以查看数据，返回是一个列表<br />
-tf.add_n(list)将所有数据加起来</p>
-<h2 id="l2正则化"><a class="markdownIt-Anchor" href="#l2正则化"></a> L2正则化</h2>
-<p>contrib.layers.l2_regularizer(_lambda)(var)<br />
-lambda为正则化参数，var为正则化对象</p>
+                <h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>tf.add_to_collection(‘losses’, num)<br>将num收集到collection中，<br>tf.get_collection可以查看数据，返回是一个列表<br>tf.add_n(list)将所有数据加起来</p>
+<h2 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h2><p>contrib.layers.l2_regularizer(_lambda)(var)<br>lambda为正则化参数，var为正则化对象</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> tensorflow.contrib <span class="keyword">as</span> contrib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取一层神经网络的权重，并将权重写入losses集合, _lambda为正则化参数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_weight</span><span class="params">(shape, _lambda)</span>:</span></span><br><span class="line">    var = tf.Variable(tf.random_normal(tf.float32, shape))</span><br><span class="line">    tf.add_to_collection(<span class="string">'losses'</span>, contrib.layers.l2_regularizer(_lambda)(var))</span><br><span class="line">    <span class="keyword">return</span> var</span><br><span class="line"></span><br><span class="line">x = tf.placeholder(tf.float32, shape=(<span class="literal">None</span>, <span class="number">2</span>))</span><br><span class="line">y_ = tf.placeholder(tf.float32, shape=(<span class="literal">None</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">8</span></span><br><span class="line"><span class="comment"># 定义每层NN的维度</span></span><br><span class="line">layer_dimension = [<span class="number">2</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">1</span>]</span><br><span class="line">n_layers = len(layer_dimension)</span><br><span class="line"></span><br><span class="line"><span class="comment"># shape = (None, 2)</span></span><br><span class="line">cur_layer = x</span><br><span class="line">in_dimension = layer_dimension[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历每层网络</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n_layers):</span><br><span class="line">    <span class="comment"># 输出层维度</span></span><br><span class="line">    out_dimension = layer_dimension[<span class="number">1</span>]</span><br><span class="line">    weight = get_weight([in_dimension, out_dimension], <span class="number">0.001</span>)</span><br><span class="line">    bias = tf.Variable(tf.constant(<span class="number">0.1</span>, shape=[out_dimension]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用ReLU激活函数(None, 2) * (2, 10)</span></span><br><span class="line">    cur_layer = tf.nn.relu(tf.matmul(cur_layer, weight) + bias)</span><br><span class="line">    in_dimension = layer_dimension[i]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最小均方误差</span></span><br><span class="line">mse_loss = tf.reduce_mean(tf.square(y_ - cur_layer))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加入损失集合</span></span><br><span class="line">tf.add_to_collection(<span class="string">'losses'</span>, mse_loss)</span><br><span class="line"></span><br><span class="line">loss = tf.add_n(tf.get_collection(<span class="string">'losses'</span>))</span><br></pre></td></tr></table></figure>
 
                 
@@ -409,7 +402,7 @@ lambda为正则化参数，var为正则化对象</p>
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#解析"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> 解析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#集合"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> 集合</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#l2正则化"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> L2正则化</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#解析"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">解析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#集合"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">集合</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#L2正则化"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">L2正则化</span></a></li></ol></li></ol>
             
           
           </div>

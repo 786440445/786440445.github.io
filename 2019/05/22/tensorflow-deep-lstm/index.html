@@ -187,13 +187,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -202,6 +195,13 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,19 +274,14 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="lstm网络结构"><a class="markdownIt-Anchor" href="#lstm网络结构"></a> LSTM网络结构</h1>
-<h2 id="单个lstm结构"><a class="markdownIt-Anchor" href="#单个lstm结构"></a> 单个lstm结构</h2>
-<p><img src="/img/article/lstm_cell.png" alt="" /></p>
+                <h1 id="LSTM网络结构"><a href="#LSTM网络结构" class="headerlink" title="LSTM网络结构"></a>LSTM网络结构</h1><h2 id="单个lstm结构"><a href="#单个lstm结构" class="headerlink" title="单个lstm结构"></a>单个lstm结构</h2><p><img src="/img/article/lstm_cell.png" alt=""></p>
 <ol>
 <li>Cell，就是我们的小本子，有个叫做state的参数东西来记事儿的</li>
 <li>Input Gate，Output Gate，在参数输入输出的时候起点作用，算一算东西</li>
 <li>Forget Gate：不是要记东西吗，咋还要Forget呢。这个没找到为啥就要加入这样一个东西，因为原始的LSTM在这个位置就是一个值1，是连接到下一时间的那个参数，估计是以前的事情记太牢了，最近的就不住就不好了，所以要选择性遗忘一些东西。（没找到解释设置这个东西的动机，还望指正）</li>
 </ol>
-<h2 id="basiclstmcell"><a class="markdownIt-Anchor" href="#basiclstmcell"></a> BasicLSTMCell</h2>
-<p>将forget_bias（默认值：1）添加到忘记门的偏差(biases)中以便在训练开始时减少以往的比例(scale)。该神经元不允许单元裁剪(cell clipping),投影层，也不使用peep-hole连接，它是一个基本的LSTM神经元。想要更高级的模型可以使用：tf.nn.rnn_cell.LSTMCell。</p>
-<h2 id="embedding_lookup"><a class="markdownIt-Anchor" href="#embedding_lookup"></a> embedding_lookup</h2>
-<h2 id="整个过程原理"><a class="markdownIt-Anchor" href="#整个过程原理"></a> 整个过程原理</h2>
-<ol>
+<h2 id="BasicLSTMCell"><a href="#BasicLSTMCell" class="headerlink" title="BasicLSTMCell"></a>BasicLSTMCell</h2><p>将forget_bias（默认值：1）添加到忘记门的偏差(biases)中以便在训练开始时减少以往的比例(scale)。该神经元不允许单元裁剪(cell clipping),投影层，也不使用peep-hole连接，它是一个基本的LSTM神经元。想要更高级的模型可以使用：tf.nn.rnn_cell.LSTMCell。</p>
+<h2 id="embedding-lookup"><a href="#embedding-lookup" class="headerlink" title="embedding_lookup"></a>embedding_lookup</h2><h2 id="整个过程原理"><a href="#整个过程原理" class="headerlink" title="整个过程原理"></a>整个过程原理</h2><ol>
 <li>输入数据为[batch_size, num_steps],每个句子的单词个数为num_steps，由于句子长度就是时间长度，因此用num_steps代表句子长度。</li>
 <li>在NLP问题中，我们用词向量表示一个单词，这里VOCAB_SIZE表示整个向量长度，语料库中单词的个数是vocab_size</li>
 <li>LSTM结构中是一个神经网络，这个网络的隐藏单元个数我们设为hidden_size，那么这个LSTM单元里就有4*hidden_size个隐藏单元，也就是隐含变量的维度。</li>
@@ -419,7 +414,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#lstm网络结构"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> LSTM网络结构</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#单个lstm结构"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> 单个lstm结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#basiclstmcell"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> BasicLSTMCell</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#embedding_lookup"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text"> embedding_lookup</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#整个过程原理"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text"> 整个过程原理</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#LSTM网络结构"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">LSTM网络结构</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#单个lstm结构"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">单个lstm结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#BasicLSTMCell"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">BasicLSTMCell</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#embedding-lookup"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">embedding_lookup</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#整个过程原理"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">整个过程原理</span></a></li></ol></li></ol>
             
           
           </div>
