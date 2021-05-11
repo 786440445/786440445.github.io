@@ -10,3 +10,7 @@ tags: TTS
 ---
 
 # MelGan
+通过输入mel谱特征，生成wav数据，使用真实wav数据进行判别训练。
+## Generator
+
+## Descrimtor 
