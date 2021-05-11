@@ -177,10 +177,9 @@ path: baidusitemap.xml
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo:
-      github:
-      coding:
-  branch: master
+  repository: https://github.com/786440445/786440445.github.io.git
+  branch: main
+  message: Update something
 
 ## share
 share: true
