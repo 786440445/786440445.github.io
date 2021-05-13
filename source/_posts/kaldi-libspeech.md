@@ -30,3 +30,21 @@ fi
 - 进入训练模型的主循环：在指定的对齐轮数，使用gmm-align-compiled对齐特征数据，得到新的对齐状态序列；每一轮都调用gmm-acc-stats-ali计算更新模型参数所用到的统计量，然后调用gmm-est更新模型参数，并且在每一轮中增加GMM的分量个数。
 
 ##
+
+1. 单音素训练：train_mono.sh
+2. 解码测试：decode.sh
+3. 单音素对齐：align_si.sh
+4. 三音素训练
+    - tri1：
+    1. train_deltas.sh
+    2. decode.sh
+    3. align_si.sh
+    - tri2：
+    1. train_deltas.sh
+    2. decode.sh
+    3. align_si.sh
+5. tri3a：区分性训练（LDA+MLLT）
+6. tri4a：说话人自适应（FMLLR）
+7. tri5a：SAT
+8. nnet3/run_tdnn.sh
+9. chain/run_tdnn.sh
