@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dusign.net/2021/05/01/kaldi-libspeech/</loc>
+    
+    <lastmod>2021-05-18T03:38:16.310Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dusign.net/2021/05/01/gmm-hmm/</loc>
     
-    <lastmod>2021-05-18T03:27:58.381Z</lastmod>
+    <lastmod>2021-05-18T03:38:04.459Z</lastmod>
     
   </url>
   
@@ -19,13 +26,6 @@
     <loc>https://dusign.net/2020/04/02/hmm-and-crf/</loc>
     
     <lastmod>2021-05-17T07:20:28.855Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dusign.net/2021/05/01/kaldi-libspeech/</loc>
-    
-    <lastmod>2021-05-14T05:07:54.837Z</lastmod>
     
   </url>
   

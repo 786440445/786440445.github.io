@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dusign.net/2021/05/01/kaldi-libspeech/</loc>
+    <lastmod>2021-05-18</lastmod>
+  </url>
+  <url>
     <loc>https://dusign.net/2021/05/01/gmm-hmm/</loc>
     <lastmod>2021-05-18</lastmod>
   </url>
@@ -11,10 +15,6 @@
   <url>
     <loc>https://dusign.net/2020/04/02/hmm-and-crf/</loc>
     <lastmod>2021-05-17</lastmod>
-  </url>
-  <url>
-    <loc>https://dusign.net/2021/05/01/kaldi-libspeech/</loc>
-    <lastmod>2021-05-14</lastmod>
   </url>
   <url>
     <loc>https://dusign.net/2021/02/10/tacotron2/</loc>
