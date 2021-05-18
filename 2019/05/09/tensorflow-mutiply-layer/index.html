@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -195,13 +202,6 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,37 +274,51 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="卷积原理"><a href="#卷积原理" class="headerlink" title="卷积原理"></a>卷积原理</h1><ol>
+                <h1 id="卷积原理"><a class="markdownIt-Anchor" href="#卷积原理"></a> 卷积原理</h1>
+<ol>
 <li>输入矩阵格式：四个维度，依次为：样本数、图像高度、图像宽度、图像通道数</li>
 <li>输出矩阵格式：与输出矩阵的维度顺序和含义相同，但是后三个维度（图像高度、图像宽度、图像通道数）的尺寸发生变化。</li>
 <li>权重矩阵（卷积核）格式：同样是四个维度，但维度的含义与上面两者都不同，为：卷积核高度、卷积核宽度、输入通道数、输出通道数（卷积核个数）</li>
 <li>输入矩阵、权重矩阵、输出矩阵这三者之间的相互决定关系</li>
 <li>卷积核的输入通道数（in depth）由输入矩阵的通道数所决定。（红色标注）</li>
 <li>输出矩阵的通道数（out depth）由卷积核的输出通道数所决定。（绿色标注）</li>
-<li>输出矩阵的高度和宽度（height, width）这两个维度的尺寸由输入矩阵、卷积核、扫描方式所共同决定。计算公式如下。（蓝色标注）<br><img src="/img/article/filter_func.png" alt=""></li>
+<li>输出矩阵的高度和宽度（height, width）这两个维度的尺寸由输入矩阵、卷积核、扫描方式所共同决定。计算公式如下。（蓝色标注）<br />
+<img src="/img/article/filter_func.png" alt="" /></li>
 </ol>
-<h1 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h1><ol>
+<h1 id="代码分析"><a class="markdownIt-Anchor" href="#代码分析"></a> 代码分析</h1>
+<ol>
 <li>tensorflow层是四维设计的,[batch_size, width, height, channels]，input4d.shape=(1, 1, 25, 1)，本例中，批量大小为1，宽度为1，高度为25，颜色通道为1</li>
 <li>扩展维度expand_dims(),降维squeeze()，</li>
 <li>卷积层结果维度公式：output_size = (W - F + 2P)/S + 1</li>
 <li>W是输入数据维度，F是过滤层大小，P是padding大小，S是步长</li>
 <li>filter的维度=(1, 5, 1, 1)，过滤器大小为1x5，输入通道为1， 输出通道（即卷积核个数）为1</li>
 </ol>
-<h2 id="卷积层-1"><a href="#卷积层-1" class="headerlink" title="卷积层-1"></a>卷积层-1</h2><p>输入[1, 1, 25, 1]，w=[1, 5, 1, 1]，输出为[1, 1, 21, 1]</p>
-<h2 id="池化层-1"><a href="#池化层-1" class="headerlink" title="池化层-1"></a>池化层-1</h2><ol>
+<h2 id="卷积层-1"><a class="markdownIt-Anchor" href="#卷积层-1"></a> 卷积层-1</h2>
+<p>输入[1, 1, 25, 1]，w=[1, 5, 1, 1]，输出为[1, 1, 21, 1]</p>
+<h2 id="池化层-1"><a class="markdownIt-Anchor" href="#池化层-1"></a> 池化层-1</h2>
+<ol>
 <li>池化层和卷积层类似，但是没有过滤层，只有形状，步长，和padding选项</li>
 <li>输入[1, 1, 21, 1]，池化过滤器大小[1, 1, 5, 1]，输出为[1, 1, 17, 1]</li>
 </ol>
-<h2 id="全链接层"><a href="#全链接层" class="headerlink" title="全链接层"></a>全链接层</h2><ol>
+<h2 id="全链接层"><a class="markdownIt-Anchor" href="#全链接层"></a> 全链接层</h2>
+<ol>
 <li>全链接weight_shape=[17, 5]，所以输入为[1, 1, 17, 1]，通过 tf.squeeze压缩到[1, 17]，最后得到shape=[1, 5]</li>
 </ol>
-<h2 id="expand-dims用法"><a href="#expand-dims用法" class="headerlink" title="expand_dims用法"></a>expand_dims用法</h2><p><img src="/img/article/expand_dims_test.png" alt=""></p>
+<h2 id="expand_dims用法"><a class="markdownIt-Anchor" href="#expand_dims用法"></a> expand_dims用法</h2>
+<p><img src="/img/article/expand_dims_test.png" alt="" /></p>
 <ol>
 <li>tf.expand_dims(Matrix, axis) 即在第axis维度处添加一个维度</li>
 <li>如上图, input1.shape = (5), tf.expand_dims(input1d, 0)即在第0个维度加一个即shape=(1,5)</li>
 <li>在input3,shape=(1,1,5)情况下，调用tf.expand_dims(input3d, 3)即在第三个维度处添加一个即为shape=(1, 1, 5, 1)</li>
 </ol>
-<h2 id="squeeze用法"><a href="#squeeze用法" class="headerlink" title="squeeze用法"></a>squeeze用法</h2><p>squeeze(<br>    input,<br>    axis=None,<br>    name=None,<br>    squeeze_dims=None<br>)<br>类似expand_dims,他是删除维度为1的所有维度，或者指定维度(维度必须为1才能删除)</p>
+<h2 id="squeeze用法"><a class="markdownIt-Anchor" href="#squeeze用法"></a> squeeze用法</h2>
+<p>squeeze(<br />
+input,<br />
+axis=None,<br />
+name=None,<br />
+squeeze_dims=None<br />
+)<br />
+类似expand_dims,他是删除维度为1的所有维度，或者指定维度(维度必须为1才能删除)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">sess = tf.Session()</span><br><span class="line"><span class="comment"># 初始化数据，长度为25</span></span><br><span class="line">data_size = <span class="number">25</span></span><br><span class="line">data_1d = np.random.normal(size=data_size)</span><br><span class="line">print(<span class="string">'Input data: '</span>)</span><br><span class="line">print(data_1d)</span><br><span class="line">x_input_id = tf.placeholder(dtype=tf.float32, shape=[data_size])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个卷积层函数，声明一个随机过滤层</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_layer_1d</span><span class="params">(input_1d, my_filter)</span>:</span></span><br><span class="line">    <span class="comment"># 将输入扩展维度为4维，【batch_size, width, height, channels】</span></span><br><span class="line">    <span class="comment"># 输出维度为output_size = (W - F + 2P)/S + 1</span></span><br><span class="line">    <span class="comment"># W:输入数据维度</span></span><br><span class="line">    <span class="comment"># F:过滤层大小</span></span><br><span class="line">    <span class="comment"># P:padding大小</span></span><br><span class="line">    <span class="comment"># S:步长大小</span></span><br><span class="line">    input_2d = tf.expand_dims(input_1d, <span class="number">0</span>)</span><br><span class="line">    input_3d = tf.expand_dims(input_2d, <span class="number">0</span>)</span><br><span class="line">    input_4d = tf.expand_dims(input_3d, <span class="number">3</span>)</span><br><span class="line">    convolution_output = tf.nn.conv2d(input_4d,</span><br><span class="line">                                      filter=my_filter,</span><br><span class="line">                                      strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">                                      padding=<span class="string">'VALID'</span>)</span><br><span class="line">    conv_output_1d = tf.squeeze(convolution_output)</span><br><span class="line">    <span class="keyword">return</span>(conv_output_1d)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成一个过滤层窗口大小</span></span><br><span class="line">my_filter = tf.Variable(tf.random_normal(shape=[<span class="number">1</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">1</span>]))</span><br><span class="line"><span class="comment"># 卷积层输出结果</span></span><br><span class="line">my_convolution_output = conv_layer_1d(x_input_id, my_filter)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明一个激活函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">activation</span><span class="params">(input_1d)</span>:</span></span><br><span class="line">    <span class="keyword">return</span>(tf.nn.relu(input_1d))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卷积层输出后经过激活函数的结果</span></span><br><span class="line">my_activation_output = activation(my_convolution_output)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明池化层函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pool</span><span class="params">(input_1d, width)</span>:</span></span><br><span class="line">    input_2d = tf.expand_dims(input_1d, <span class="number">0</span>)</span><br><span class="line">    input_3d = tf.expand_dims(input_2d, <span class="number">0</span>)</span><br><span class="line">    input_4d = tf.expand_dims(input_3d, <span class="number">3</span>)</span><br><span class="line">    pool_out = tf.nn.max_pool(input_4d, ksize=[<span class="number">1</span>, <span class="number">1</span>, width, <span class="number">1</span>], strides=[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], padding=<span class="string">'VALID'</span>)</span><br><span class="line">    pool_output_1d = tf.squeeze(pool_out)</span><br><span class="line">    <span class="keyword">return</span>(pool_output_1d)</span><br><span class="line"></span><br><span class="line">my_maxpool_output = max_pool(my_activation_output, width=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最后一层连接的是全链接层</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fully_connected</span><span class="params">(input_layer, num_outputs)</span>:</span></span><br><span class="line">    weight_shape = tf.squeeze(tf.stack([tf.shape(input_layer), [num_outputs]]))</span><br><span class="line">    weight = tf.random_normal(weight_shape, stddev=<span class="number">0.1</span>)</span><br><span class="line">    bias = tf.random_normal(shape=[num_outputs])</span><br><span class="line"></span><br><span class="line">    input_layer_2d = tf.expand_dims(input_layer, <span class="number">0</span>)</span><br><span class="line">    full_output = tf.add(tf.matmul(input_layer_2d, weight), bias)</span><br><span class="line"></span><br><span class="line">    full_output_1d = tf.squeeze(full_output)</span><br><span class="line">    <span class="keyword">return</span> full_output_1d</span><br><span class="line"></span><br><span class="line">my_full_output = fully_connected(my_maxpool_output, <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化所有变量,运行计算图打印每层输出结果</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">sess.run(init)</span><br><span class="line">feed_dict = &#123;x_input_id: data_1d&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 卷积层输出</span></span><br><span class="line">print(<span class="string">'Input = array of length 25'</span>)</span><br><span class="line">print(<span class="string">'Convolution w/filter, length = 5, stride_size = 1, result in an array of length 21: '</span>)</span><br><span class="line">print(sess.run(my_convolution_output, feed_dict=feed_dict))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 激活函数输出</span></span><br><span class="line">print(<span class="string">'Input = the above array of length 21'</span>)</span><br><span class="line">print(<span class="string">'ReLU element wise returns the array of length 21: '</span>)</span><br><span class="line">print(sess.run(my_activation_output, feed_dict=feed_dict))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 池化层输出</span></span><br><span class="line">print(<span class="string">'Input = the above array of length 21'</span>)</span><br><span class="line">print(<span class="string">'MaxPool, window length = 5, stride size = 1, results in array of length 17: '</span>)</span><br><span class="line">print(sess.run(my_maxpool_output, feed_dict=feed_dict))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全链接层输出</span></span><br><span class="line">print(<span class="string">'Input = the above array of length 17'</span>)</span><br><span class="line">print(<span class="string">'Fully connected layer on all four rows with five outputs: '</span>)</span><br><span class="line">print(sess.run(my_full_output, feed_dict=feed_dict))</span><br></pre></td></tr></table></figure>
 
                 
@@ -431,7 +445,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#卷积原理"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">卷积原理</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#代码分析"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">代码分析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#卷积层-1"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">卷积层-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#池化层-1"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">池化层-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#全链接层"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">全链接层</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#expand-dims用法"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">expand_dims用法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#squeeze用法"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">squeeze用法</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#卷积原理"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> 卷积原理</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#代码分析"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"> 代码分析</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#卷积层-1"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text"> 卷积层-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#池化层-1"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text"> 池化层-1</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#全链接层"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text"> 全链接层</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#expand_dims用法"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text"> expand_dims用法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#squeeze用法"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text"> squeeze用法</span></a></li></ol></li></ol>
             
           
           </div>

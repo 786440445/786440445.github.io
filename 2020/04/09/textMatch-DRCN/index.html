@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">575</span> and
+                                Words <span class="post-count">576</span> and
                                 Reading Time <span class="post-count">2</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -195,13 +202,6 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,21 +274,28 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="DRCN：密集循环注意力网络"><a href="#DRCN：密集循环注意力网络" class="headerlink" title="DRCN：密集循环注意力网络"></a>DRCN：密集循环注意力网络</h2><h3 id="1-Word-Representation-Layer"><a href="#1-Word-Representation-Layer" class="headerlink" title="1.Word Representation Layer"></a>1.Word Representation Layer</h3><p>​    将输入的两个句子表示为P和Q，长度分别为I和J。每个词的word representation feature由三部分构成：word embedding, character representation, the exact matched flag。</p>
+                <h2 id="drcn密集循环注意力网络"><a class="markdownIt-Anchor" href="#drcn密集循环注意力网络"></a> DRCN：密集循环注意力网络</h2>
+<h3 id="1word-representation-layer"><a class="markdownIt-Anchor" href="#1word-representation-layer"></a> 1.Word Representation Layer</h3>
+<p>​	将输入的两个句子表示为P和Q，长度分别为I和J。每个词的word representation feature由三部分构成：word embedding, character representation, the exact matched flag。</p>
 <ol>
 <li>其中word embedding包括固定好的预训练模型（GloVe或者Word2Vec）和可以训练的WordEmbedding。可训练的wordembedding会导致过拟合。固定的wordembedding缺少特殊场景的数据会很健壮。融合选取。</li>
 <li>Character Embedding是随着模型训练的。</li>
 <li>the exact matched flag则表示代表词是否在其他句子中出现。类似DIIN中的EM标志。</li>
 </ol>
-<h3 id="2-Attentively-Connected-RNN"><a href="#2-Attentively-Connected-RNN" class="headerlink" title="2.Attentively Connected RNN"></a>2.Attentively Connected RNN</h3><h4 id="2-1Densely-connected-Recurrent-Networks"><a href="#2-1Densely-connected-Recurrent-Networks" class="headerlink" title="2.1Densely-connected Recurrent Networks"></a>2.1Densely-connected Recurrent Networks</h4><p>​    传统的多层RNN结构在层数加深的过程中会遭遇梯度消失或梯度爆炸等问题。为了解决此问题，研究者们提出了残差网络ResNet，即在网络前向传播中增加跳跃传播的过程，将信息更有效地传播至更深的层。</p>
-<p>​    但是ResNet的做法是将输入与输出相加作为下一层的输入。这样输入的信息会在传递的过程中产生一些影响。</p>
-<p>​    借用DenseNet将输入和输出串联起来。通道数维度上进行连接。很好的进行传递。</p>
-<h4 id="2-2Densely-connected-Co-attentive-Networks"><a href="#2-2Densely-connected-Co-attentive-Networks" class="headerlink" title="2.2Densely-connected Co-attentive Networks"></a>2.2Densely-connected Co-attentive Networks</h4><p>​    Attention机制可以在两个句子间建立对应关系，在多层RNN的每层中计算P和Q的attention信息，通过串联拼接得到每层RNN的输出。</p>
-<p><img src="\img\article\v2-a3baf1e6e428303b7414d0eb0c927c74_hd.jpg" alt="v2-a3baf1e6e428303b7414d0eb0c927c74_hd"></p>
-<p><img src="\img\article\v2-642056e4a761b6487c768e33ffe3cf1b_hd.jpg" alt="v2-642056e4a761b6487c768e33ffe3cf1b_hd"></p>
-<h4 id="2-3Bottleneck-Component"><a href="#2-3Bottleneck-Component" class="headerlink" title="2.3Bottleneck Component"></a>2.3Bottleneck Component</h4><p>​    由于在多层RNN中进行了拼接操作，随着层数的加深，需要训练的参数会大量增加，因此引入自编码模块进行特征维数的压缩，实验证明，此操作对测试集起到了正则作用，提高了测试准确率。</p>
-<h3 id="3-Interaction-and-Prediction-Layer"><a href="#3-Interaction-and-Prediction-Layer" class="headerlink" title="3.Interaction and Prediction Layer"></a>3.Interaction and Prediction Layer</h3><p>​    由于P、Q的长度不同，本文通过Max Pooling对每个句子分别得到其向量表示p、q，计算得到含有语义匹配信息的向量v，具体如下：</p>
-<p><img src="\img\article\v2-fe65e454c2db3aeb00a2b911f2f4b729_hd.jpg" alt="v2-fe65e454c2db3aeb00a2b911f2f4b729_hd"></p>
+<h3 id="2attentively-connected-rnn"><a class="markdownIt-Anchor" href="#2attentively-connected-rnn"></a> 2.Attentively Connected RNN</h3>
+<h4 id="21densely-connected-recurrent-networks"><a class="markdownIt-Anchor" href="#21densely-connected-recurrent-networks"></a> 2.1Densely-connected Recurrent Networks</h4>
+<p>​	传统的多层RNN结构在层数加深的过程中会遭遇梯度消失或梯度爆炸等问题。为了解决此问题，研究者们提出了残差网络ResNet，即在网络前向传播中增加跳跃传播的过程，将信息更有效地传播至更深的层。</p>
+<p>​	但是ResNet的做法是将输入与输出相加作为下一层的输入。这样输入的信息会在传递的过程中产生一些影响。</p>
+<p>​	借用DenseNet将输入和输出串联起来。通道数维度上进行连接。很好的进行传递。</p>
+<h4 id="22densely-connected-co-attentive-networks"><a class="markdownIt-Anchor" href="#22densely-connected-co-attentive-networks"></a> 2.2Densely-connected Co-attentive Networks</h4>
+<p>​	Attention机制可以在两个句子间建立对应关系，在多层RNN的每层中计算P和Q的attention信息，通过串联拼接得到每层RNN的输出。</p>
+<p><img src="%5Cimg%5Carticle%5Cv2-a3baf1e6e428303b7414d0eb0c927c74_hd.jpg" alt="v2-a3baf1e6e428303b7414d0eb0c927c74_hd" /></p>
+<p><img src="%5Cimg%5Carticle%5Cv2-642056e4a761b6487c768e33ffe3cf1b_hd.jpg" alt="v2-642056e4a761b6487c768e33ffe3cf1b_hd" /></p>
+<h4 id="23bottleneck-component"><a class="markdownIt-Anchor" href="#23bottleneck-component"></a> 2.3Bottleneck Component</h4>
+<p>​	由于在多层RNN中进行了拼接操作，随着层数的加深，需要训练的参数会大量增加，因此引入自编码模块进行特征维数的压缩，实验证明，此操作对测试集起到了正则作用，提高了测试准确率。</p>
+<h3 id="3interaction-and-prediction-layer"><a class="markdownIt-Anchor" href="#3interaction-and-prediction-layer"></a> 3.Interaction and Prediction Layer</h3>
+<p>​	由于P、Q的长度不同，本文通过Max Pooling对每个句子分别得到其向量表示p、q，计算得到含有语义匹配信息的向量v，具体如下：</p>
+<p><img src="%5Cimg%5Carticle%5Cv2-fe65e454c2db3aeb00a2b911f2f4b729_hd.jpg" alt="v2-fe65e454c2db3aeb00a2b911f2f4b729_hd" /></p>
 <p>最后将v输入全连接层，并根据具体任务通过softmax进行分类。</p>
 <p>本文整体架构是一个端到端的过程，损失函数定义为交叉熵损失与自编码器的重建损失之和，并选用RMSProp算法进行参数优化。</p>
 
@@ -416,7 +423,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#DRCN：密集循环注意力网络"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">DRCN：密集循环注意力网络</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Word-Representation-Layer"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1.Word Representation Layer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Attentively-Connected-RNN"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2.Attentively Connected RNN</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-1Densely-connected-Recurrent-Networks"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">2.1Densely-connected Recurrent Networks</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-2Densely-connected-Co-attentive-Networks"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">2.2Densely-connected Co-attentive Networks</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2-3Bottleneck-Component"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">2.3Bottleneck Component</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Interaction-and-Prediction-Layer"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">3.Interaction and Prediction Layer</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#drcn密集循环注意力网络"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> DRCN：密集循环注意力网络</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1word-representation-layer"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> 1.Word Representation Layer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2attentively-connected-rnn"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> 2.Attentively Connected RNN</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#21densely-connected-recurrent-networks"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text"> 2.1Densely-connected Recurrent Networks</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#22densely-connected-co-attentive-networks"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text"> 2.2Densely-connected Co-attentive Networks</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#23bottleneck-component"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text"> 2.3Bottleneck Component</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3interaction-and-prediction-layer"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text"> 3.Interaction and Prediction Layer</span></a></li></ol></li></ol>
             
           
           </div>

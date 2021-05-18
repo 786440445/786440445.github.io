@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">338</span> and
+                                Words <span class="post-count">341</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -195,13 +202,6 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,7 +274,13 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="滑动平均模型"><a href="#滑动平均模型" class="headerlink" title="滑动平均模型"></a>滑动平均模型</h1><p>tf.train.ExponentialMovingAverage(decay, step)<br>decay = min{decay, 1+step/(10+step)}<br>shadow_variable = decay <em> shadow_variable + (1-decay) </em> v1<br>ema.average(v1) = shadow_variable<br>shadow_variable为影子变量，variable为待更新的变量，decay为衰减率<br>decay决定了模型的更新速度，decay越大，模型越稳定</p>
+                <h1 id="滑动平均模型"><a class="markdownIt-Anchor" href="#滑动平均模型"></a> 滑动平均模型</h1>
+<p>tf.train.ExponentialMovingAverage(decay, step)<br />
+decay = min{decay, 1+step/(10+step)}<br />
+shadow_variable = decay * shadow_variable + (1-decay) * v1<br />
+ema.average(v1) = shadow_variable<br />
+shadow_variable为影子变量，variable为待更新的变量，decay为衰减率<br />
+decay决定了模型的更新速度，decay越大，模型越稳定</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 滑动平均模型</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">v1 = tf.Variable(<span class="number">0</span>, dtype=tf.float32)</span><br><span class="line"><span class="comment"># 模拟轮数，控制衰减率</span></span><br><span class="line">step = tf.Variable(<span class="number">0</span>, trainable=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个滑动平均的类class，初始化时给定了衰减率，和控制衰减率的变量step</span></span><br><span class="line">ema = tf.train.ExponentialMovingAverage(<span class="number">0.99</span>, step)</span><br><span class="line"><span class="comment"># 定义一个更新变量滑动平均的操作，这里需要给定一个列表，每次执行这个操作时</span></span><br><span class="line"><span class="comment"># 列表中的变量都会被更新</span></span><br><span class="line">maintain_averages_op = ema.apply([v1])</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    init_op = tf.initialize_all_variables()</span><br><span class="line">    sess.run(init_op)</span><br><span class="line">    <span class="comment"># 初始值为(0, 0)</span></span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 更新变量的值 为5</span></span><br><span class="line">    sess.run(tf.assign(v1, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 衰减率 = min&#123;0.99, (1+step)/(10+step)&#125; = 0.1</span></span><br><span class="line">    <span class="comment"># 数值为0.1*0 + 0.9*5 = 4.5</span></span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line"></span><br><span class="line">    sess.run(tf.assign(step, <span class="number">10000</span>))</span><br><span class="line">    sess.run(tf.assign(v1, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 衰减率 = min&#123;0.99, (1+step)/(10+step)&#125; = 0.99</span></span><br><span class="line">    <span class="comment"># 数值为0.99*4.5 + 0.01*10 = 4.555</span></span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 衰减率 = min&#123;0.99, (1+step)/(10+step)&#125; = 0.99</span></span><br><span class="line">    <span class="comment"># 数值为0.99*4.555 + 0.01*10 = 4.60945</span></span><br><span class="line">    sess.run(maintain_averages_op)</span><br><span class="line">    print(sess.run([v1, ema.average(v1)]))</span><br></pre></td></tr></table></figure>
 
                 
@@ -401,7 +407,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#滑动平均模型"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">滑动平均模型</span></a></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#滑动平均模型"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> 滑动平均模型</span></a></li></ol>
             
           
           </div>

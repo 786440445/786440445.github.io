@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://dusign.net/2021/05/01/gmm-hmm/</loc>
+    
+    <lastmod>2021-05-18T03:27:58.381Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dusign.net/2021/05/01/melgan/</loc>
+    
+    <lastmod>2021-05-17T08:29:24.011Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dusign.net/2020/04/02/hmm-and-crf/</loc>
+    
+    <lastmod>2021-05-17T07:20:28.855Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dusign.net/2021/05/01/kaldi-libspeech/</loc>
+    
+    <lastmod>2021-05-14T05:07:54.837Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dusign.net/2021/02/10/tacotron2/</loc>
+    
+    <lastmod>2021-05-13T02:53:21.709Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://dusign.net/tags/index.html</loc>
     
     <lastmod>2021-05-11T14:01:38.138Z</lastmod>
@@ -23,14 +58,14 @@
   </url>
   
   <url>
-    <loc>https://dusign.net/archive/index.html</loc>
+    <loc>https://dusign.net/about/index.html</loc>
     
     <lastmod>2021-05-11T14:01:38.006Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://dusign.net/about/index.html</loc>
+    <loc>https://dusign.net/archive/index.html</loc>
     
     <lastmod>2021-05-11T14:01:38.006Z</lastmod>
     
@@ -79,13 +114,6 @@
   </url>
   
   <url>
-    <loc>https://dusign.net/2020/04/02/hmm-and-crf/</loc>
-    
-    <lastmod>2021-05-01T11:05:53.926Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://dusign.net/2019/04/30/tensorflow-Linear-R2/</loc>
     
     <lastmod>2021-05-01T11:05:53.926Z</lastmod>
@@ -128,13 +156,6 @@
   </url>
   
   <url>
-    <loc>https://dusign.net/2019/05/17/tensorflow-cnn-lenet5/</loc>
-    
-    <lastmod>2021-05-01T11:05:53.922Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://dusign.net/2020/04/09/textMatch-DIIN/</loc>
     
     <lastmod>2021-05-01T11:05:53.922Z</lastmod>
@@ -156,9 +177,9 @@
   </url>
   
   <url>
-    <loc>https://dusign.net/2021/02/10/tacotron2/</loc>
+    <loc>https://dusign.net/2019/05/17/tensorflow-cnn-lenet5/</loc>
     
-    <lastmod>2021-05-01T11:05:53.921Z</lastmod>
+    <lastmod>2021-05-01T11:05:53.922Z</lastmod>
     
   </url>
   
@@ -313,13 +334,6 @@
     <loc>https://dusign.net/2019/05/22/tensorflow-deep-lstm/</loc>
     
     <lastmod>2021-05-01T11:05:53.914Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dusign.net/2021/05/01/melgan/</loc>
-    
-    <lastmod>2021-05-01T11:05:53.913Z</lastmod>
     
   </url>
   

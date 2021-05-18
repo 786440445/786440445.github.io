@@ -16,11 +16,11 @@
     <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
     <title>
         
-          Thread.State - Hexo-theme-snail
+          kaldi - Hexo-theme-snail
         
     </title>
 
-    <link rel="canonical" href="https://dusign.net/2019/04/25/thread-state/">
+    <link rel="canonical" href="https://dusign.net/2021/05/01/kaldi-libspeech/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -112,20 +112,20 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#多线程" title="多线程">多线程</a>
+                              <a class="tag" href="/tags/#ASR" title="ASR">ASR</a>
                             
                         </div>
-                        <h1>Thread.State</h1>
-                        <h2 class="subheading">线程之间的状态</h2>
+                        <h1>kaldi</h1>
+                        <h2 class="subheading">speech</h2>
                         <span class="meta">
                             Posted by Dusign on
-                            2019-04-25
+                            2021-05-01
                         </span>
 
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">232</span> and
+                                Words <span class="post-count">309</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -274,20 +274,50 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="线程直接的状态主要有如下几种"><a class="markdownIt-Anchor" href="#线程直接的状态主要有如下几种"></a> 线程直接的状态主要有如下几种</h1>
+                <h2 id="kaldi"><a class="markdownIt-Anchor" href="#kaldi"></a> kaldi</h2>
 <ul>
-<li>NEW 就绪</li>
-<li>RUNNABLE 线程运行中或I/O等待</li>
-<li>BLOCKED 线程在等待monitor锁(synchronized关键字)</li>
-<li>WAITING 线程在无限等待唤醒</li>
-<li>TIME_WAITING 线程在等待唤醒，但设置了时限</li>
+<li>模型初始化：</li>
 </ul>
-<h1 id="几种线程关键字的解释"><a class="markdownIt-Anchor" href="#几种线程关键字的解释"></a> 几种线程关键字的解释</h1>
-<p>sleep: 线程进入等待状态，获得到了cpu进行等待时间，即等待状态<br />
-yield: 线程释放cpu，重新进入就绪状态，与其他线程一同抢占cpu<br />
-join: thread.join()，即thread插入当前线程之前，在运行完thread之后，当前线程继续执行<br />
-wait: 是Object下的方法，wait()的作用是让当前线程进入等待状态，同时，wait()也会让当前线程释放它所持有的锁<br />
-notify, notifyAll: notify()和notifyAll()的作用，则是唤醒当前对象上的等待线程；notify()是唤醒单个线程，而notifyAll()是唤醒所有的线程。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 单音速模型训练</span></span><br><span class="line">if [ $stage -le 8 ]; then</span><br><span class="line"><span class="meta">  #</span><span class="bash"> train a monophone system</span></span><br><span class="line">  steps/train_mono.sh --boost-silence 1.25 --nj 20 --cmd "$train_cmd" \</span><br><span class="line">                      data/train_2kshort data/lang_nosp exp/mono</span><br><span class="line">fi</span><br><span class="line"><span class="meta">#</span><span class="bash"> boost-silence 1.25: 表示</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>train_mono.sh内部过程</li>
+</ol>
+<ul>
+<li>初始化单音素模型。调用gmm-init-mono，生成0.mdl、tree。</li>
+<li>调用compile-train-graph生成text中每句抄本对应的fst，存放在fsts.JOB.gz</li>
+<li>第一次对齐数据。调用align-equal-stats-ali生成对齐状态序列，通过管道传递给gmm-acc-stats-ali，得到更新参数时用到的统计量</li>
+<li>第一次更新模型参数。调用gmm-est更新模型参数。</li>
+<li>进入训练模型的主循环：在指定的对齐轮数，使用gmm-align-compiled对齐特征数据，得到新的对齐状态序列；每一轮都调用gmm-acc-stats-ali计算更新模型参数所用到的统计量，然后调用gmm-est更新模型参数，并且在每一轮中增加GMM的分量个数。</li>
+</ul>
+<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
+<ol>
+<li>单音素训练：train_mono.sh</li>
+<li>解码测试：<a href="http://decode.sh" target="_blank" rel="noopener">decode.sh</a></li>
+<li>单音素对齐：align_si.sh</li>
+<li>三音素训练
+<ul>
+<li>tri1：</li>
+</ul>
+<ol>
+<li>train_deltas.sh</li>
+<li><a href="http://decode.sh" target="_blank" rel="noopener">decode.sh</a></li>
+<li>align_si.sh</li>
+</ol>
+<ul>
+<li>tri2：</li>
+</ul>
+<ol>
+<li>train_deltas.sh</li>
+<li><a href="http://decode.sh" target="_blank" rel="noopener">decode.sh</a></li>
+<li>align_si.sh</li>
+</ol>
+</li>
+<li>tri3a：区分性训练（LDA+MLLT）</li>
+<li>tri4a：说话人自适应（FMLLR）</li>
+<li>tri5a：SAT</li>
+<li>nnet3/run_tdnn.sh</li>
+<li>chain/run_tdnn.sh</li>
+</ol>
 
                 
                 <hr>
@@ -295,9 +325,13 @@ notify, notifyAll: notify()和notifyAll()的作用，则是唤醒当前对象上
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2019/04/26/tensorflow-activate-lost/" data-toggle="tooltip" data-placement="top" title="tensorflow之激励函数和损失函数">&larr; Previous Post</a>
+                        <a href="/2021/05/01/gmm-hmm/" data-toggle="tooltip" data-placement="top" title="kaldi">&larr; Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2021/05/01/melgan/" data-toggle="tooltip" data-placement="top" title="melgan">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -409,7 +443,7 @@ notify, notifyAll: notify()和notifyAll()的作用，则是唤醒当前对象上
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#线程直接的状态主要有如下几种"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> 线程直接的状态主要有如下几种</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#几种线程关键字的解释"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"> 几种线程关键字的解释</span></a></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#kaldi"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> kaldi</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"> </span></a></li></ol>
             
           
           </div>
@@ -431,7 +465,7 @@ notify, notifyAll: notify()和notifyAll()的作用，则是唤醒当前对象上
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#多线程" title="多线程">多线程</a>
+                          <a class="tag" href="/tags/#ASR" title="ASR">ASR</a>
                         
                     </div>
                 </section>

@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -195,13 +202,6 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,11 +274,13 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="HMM分词"><a href="#HMM分词" class="headerlink" title="HMM分词"></a>HMM分词</h1><blockquote>
-<p>解决三个问题：模型λ=（A，B，π）。A为状态转移概率矩阵，B是观测概率矩阵。π是初始状态概率向量。<br>π和A决定状态序列。B决定观测序列。O为观测序列，I为状态序列。</p>
+                <h1 id="hmm分词"><a class="markdownIt-Anchor" href="#hmm分词"></a> HMM分词</h1>
+<blockquote>
+<p>解决三个问题：模型λ=（A，B，π）。A为状态转移概率矩阵，B是观测概率矩阵。π是初始状态概率向量。<br />
+π和A决定状态序列。B决定观测序列。O为观测序列，I为状态序列。</p>
 </blockquote>
 <ol>
-<li>概率计算问题：已知（A，B，π），和O观测序列。求：O观测序列出现概率P(O|λ)。 </li>
+<li>概率计算问题：已知（A，B，π），和O观测序列。求：O观测序列出现概率P(O|λ)。</li>
 <li>学习问题：已知O观测序列，估计模型的参数λ，使P(O|λ)最大。</li>
 <li>预测问题：也就是解码问题。已知λ=（A，B，π）和观测序列O，求给定观测序列条件概率P（I|O）最大的状态序列I。</li>
 </ol>
@@ -286,20 +288,24 @@
 <li>篱笆网络（Lattice）求最短路径问题采用维特比算法进行解码。维特比算法是采用动态规划求最短路径的方案。实现的时间复杂度为O(d*N^2)。d为序列长度，N为状态数量。</li>
 <li>根据一条路径A{1,2,3,4}-B{1,2,3,4}-C{1,2,3,4}-D{1,2,3,4}通过维特比算法求其最短路径方案。A{1-4}-B{1-4}有16种方案。保留其A{1-4}-B1最优的一种。保留A{1-4}-B2最优的一种，保留A{1-4}-B3最优的一种，保留A{1-4}-B4最优的一种。根据这四种继续往C计算16种，再保留分别经过C1，C2，C3，C4的最优的一种。直到D。这就是维特比算法。每次16中路径中保留了最优的四种方案。时间复杂度为O（序列长度乘以状态个数的平方）。</li>
 </ul>
-<h1 id="CRF-Condition-Random-Field"><a href="#CRF-Condition-Random-Field" class="headerlink" title="CRF(Condition Random Field)"></a>CRF(Condition Random Field)</h1><p>定义：条件随机场是给定随机变量X条件下，随机变量Y的马尔科夫随机场。满足 <img src="https://www.zhihu.com/equation?tex=P%28Y_%7Bv%7D%7CX%2CY_%7Bw%7D%2Cw+%5Cneq+v%29+%3D+P%28Y_%7Bv%7D%7CX%2CY_%7Bw%7D%2Cw+%5Csim+v%29+" alt="[公式]"> 的马尔科夫随机场叫做条件随机场（CRF）</p>
-<h1 id="概率图模型："><a href="#概率图模型：" class="headerlink" title="概率图模型："></a>概率图模型：</h1><h3 id="有向图模型："><a href="#有向图模型：" class="headerlink" title="有向图模型："></a>有向图模型：</h3><p><img src="\img\article\v2-5b3f6b4a2d905297b7f73a89e92ee618_r.jpg" alt="v2-5b3f6b4a2d905297b7f73a89e92ee618_r"></p>
+<h1 id="crfcondition-random-field"><a class="markdownIt-Anchor" href="#crfcondition-random-field"></a> CRF(Condition Random Field)</h1>
+<p>定义：条件随机场是给定随机变量X条件下，随机变量Y的马尔科夫随机场。满足 <img src="https://www.zhihu.com/equation?tex=P%28Y_%7Bv%7D%7CX%2CY_%7Bw%7D%2Cw+%5Cneq+v%29+%3D+P%28Y_%7Bv%7D%7CX%2CY_%7Bw%7D%2Cw+%5Csim+v%29+" alt="[公式]" /> 的马尔科夫随机场叫做条件随机场（CRF）</p>
+<h1 id="概率图模型"><a class="markdownIt-Anchor" href="#概率图模型"></a> 概率图模型：</h1>
+<h3 id="有向图模型"><a class="markdownIt-Anchor" href="#有向图模型"></a> 有向图模型：</h3>
+<p><img src="%5Cimg%5Carticle%5Cv2-5b3f6b4a2d905297b7f73a89e92ee618_r.jpg" alt="v2-5b3f6b4a2d905297b7f73a89e92ee618_r" /></p>
 <p>联合概率P（X）=p(x1)p(x2|x1)p(x3|x2)p(x4|x2)p(x5|x3,x4)</p>
-<h3 id="无向图模型："><a href="#无向图模型：" class="headerlink" title="无向图模型："></a>无向图模型：</h3><p><img src="\img\article\wuxiangtu.png" alt="wuxiangtu"></p>
-<p>可以用因子分解将 <img src="https://www.zhihu.com/equation?tex=P%3D%28Y%29" alt="[公式]"> 写为若干个联合概率的乘积。咋分解呢，将一个图分为若干个“小团”，注意每个团必须是“最大团”。结果为所有最大团上势函数的乘积。</p>
-<p><img src="\img\article\wuxiangtugailv.png" alt=""></p>
-<p>Z(x)为规范化因子，即<img src="\img\article\wuxiangtuguifanhuayinzi.png" alt="wuxiangtuguifanhuayinzi"></p>
+<h3 id="无向图模型"><a class="markdownIt-Anchor" href="#无向图模型"></a> 无向图模型：</h3>
+<p><img src="%5Cimg%5Carticle%5Cwuxiangtu.png" alt="wuxiangtu" /></p>
+<p>可以用因子分解将 <img src="https://www.zhihu.com/equation?tex=P%3D%28Y%29" alt="[公式]" /> 写为若干个联合概率的乘积。咋分解呢，将一个图分为若干个“小团”，注意每个团必须是“最大团”。结果为所有最大团上势函数的乘积。</p>
+<p><img src="%5Cimg%5Carticle%5Cwuxiangtugailv.png" alt="" /></p>
+<p>Z(x)为规范化因子，即<img src="%5Cimg%5Carticle%5Cwuxiangtuguifanhuayinzi.png" alt="wuxiangtuguifanhuayinzi" /></p>
 <p>所以对于上图的无向图而言，</p>
-<p><img src="\img\article\wuxiangtugailv1.png" alt="wuxiangtugailv1"></p>
-<p>其中<img src="https://www.zhihu.com/equation?tex=+%5Cpsi_%7Bc%7D%28Y_%7Bc%7D+%29" alt="[公式]"> 是一个最大团 <img src="https://www.zhihu.com/equation?tex=C" alt="[公式]"> 上随机变量们的联合概率，一般取指数函数的：</p>
-<p><img src="\img\article\zuidatuan.png" alt="zuidatuan"></p>
+<p><img src="%5Cimg%5Carticle%5Cwuxiangtugailv1.png" alt="wuxiangtugailv1" /></p>
+<p>其中<img src="https://www.zhihu.com/equation?tex=+%5Cpsi_%7Bc%7D%28Y_%7Bc%7D+%29" alt="[公式]" /> 是一个最大团 <img src="https://www.zhihu.com/equation?tex=C" alt="[公式]" /> 上随机变量们的联合概率，一般取指数函数的：</p>
+<p><img src="%5Cimg%5Carticle%5Czuidatuan.png" alt="zuidatuan" /></p>
 <p>管这个东西叫做势函数。其中有点CRF的影子。</p>
 <p>那么概率无向图的联合概率分布可以在因子分解下表示为：</p>
-<p><img src="\img\article\yinshifenjie.png" alt="yinshifenjie"></p>
+<p><img src="%5Cimg%5Carticle%5Cyinshifenjie.png" alt="yinshifenjie" /></p>
 
                 
                 <hr>
@@ -425,7 +431,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#HMM分词"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">HMM分词</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#CRF-Condition-Random-Field"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">CRF(Condition Random Field)</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#概率图模型："><span class="toc-nav-number">3.</span> <span class="toc-nav-text">概率图模型：</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#有向图模型："><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">有向图模型：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#无向图模型："><span class="toc-nav-number">3.0.2.</span> <span class="toc-nav-text">无向图模型：</span></a></li></ol></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#hmm分词"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> HMM分词</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#crfcondition-random-field"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"> CRF(Condition Random Field)</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#概率图模型"><span class="toc-nav-number">3.</span> <span class="toc-nav-text"> 概率图模型：</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#有向图模型"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text"> 有向图模型：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#无向图模型"><span class="toc-nav-number">3.0.2.</span> <span class="toc-nav-text"> 无向图模型：</span></a></li></ol></li></ol></li></ol>
             
           
           </div>

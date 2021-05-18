@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -195,13 +202,6 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,12 +274,16 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="D-FSMN"><a href="#D-FSMN" class="headerlink" title="D-FSMN"></a>D-FSMN</h1><h2 id="模型结构"><a href="#模型结构" class="headerlink" title="模型结构"></a>模型结构</h2><p><img src="/img/article/d-fsmn_1.png" alt=""></p>
-<h2 id="模型介绍"><a href="#模型介绍" class="headerlink" title="模型介绍"></a>模型介绍</h2><ol>
+                <h1 id="d-fsmn"><a class="markdownIt-Anchor" href="#d-fsmn"></a> D-FSMN</h1>
+<h2 id="模型结构"><a class="markdownIt-Anchor" href="#模型结构"></a> 模型结构</h2>
+<p><img src="/img/article/d-fsmn_1.png" alt="" /></p>
+<h2 id="模型介绍"><a class="markdownIt-Anchor" href="#模型介绍"></a> 模型介绍</h2>
+<ol>
 <li>D-FSMN是建立在C-FSMN的基础上，进行深层次的构建网络的。</li>
 <li>我们通过在cFSMN的记忆模块（红色框框表示）之间添加跳转连接（skip connection），从而使得低层记忆模块的输出会被直接累加到高层记忆模块里。这样在训练过程中，高层记忆模块的梯度会直接赋值给低层的记忆模块，从而可以克服由于网络的深度造成的梯度消失问题，使得可以稳定的训练深层的网络。</li>
 </ol>
-<h2 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h2><p><img src="/img/article/d-fsmn_2.png" alt=""></p>
+<h2 id="计算公式"><a class="markdownIt-Anchor" href="#计算公式"></a> 计算公式</h2>
+<p><img src="/img/article/d-fsmn_2.png" alt="" /></p>
 <ol>
 <li>其中表示第层记忆模块第t个时刻的输出。和分别表示历史和未来时刻的编码步幅因子，例如 则表示对历史信息进行编码时每隔一个时刻取一个值作为输入。这样在相同的阶数的情况下可以看到更远的历史，从而可以更加有效的对长时相关性进行建模。对于实时的语音识别系统我们可以通过灵活的设置未来阶数来控制模型的时延.</li>
 <li>我们提出的DFSMN优势在于，通过跳转连接可以训练很深的网络。对于原来的cFSMN，由于每个隐层已经通过矩阵的低秩分解拆分成了两层的结构，这样对于一个包含4层cFSMN层以及两个DNN层的网络，总共包含的层数将达到13层，从而采用更多的cFSMN层，会使得层数更多而使得训练出现梯度消失问题，导致训练的不稳定性。</li>
@@ -411,7 +415,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#D-FSMN"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">D-FSMN</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型结构"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">模型结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型介绍"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">模型介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#计算公式"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">计算公式</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#d-fsmn"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> D-FSMN</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型结构"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> 模型结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型介绍"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> 模型介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#计算公式"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text"> 计算公式</span></a></li></ol></li></ol>
             
           
           </div>

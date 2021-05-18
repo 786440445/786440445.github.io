@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">569</span> and
+                                Words <span class="post-count">572</span> and
                                 Reading Time <span class="post-count">2</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -195,13 +202,6 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,11 +274,14 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="DIIN：密集交互推断网络"><a href="#DIIN：密集交互推断网络" class="headerlink" title="DIIN：密集交互推断网络"></a>DIIN：密集交互推断网络</h2><h3 id="1-Embedding-Layer"><a href="#1-Embedding-Layer" class="headerlink" title="1. Embedding Layer:"></a>1. Embedding Layer:</h3><p>将词向量，字符特征向量和句法特征向量 进行串联。</p>
+                <h2 id="diin密集交互推断网络"><a class="markdownIt-Anchor" href="#diin密集交互推断网络"></a> DIIN：密集交互推断网络</h2>
+<h3 id="1-embedding-layer"><a class="markdownIt-Anchor" href="#1-embedding-layer"></a> 1. Embedding Layer:</h3>
+<p>将词向量，字符特征向量和句法特征向量 进行串联。</p>
 <p>词向量可以是通过预训练模型word2vec拿到。</p>
 <p>字符特征向量是将字符向量 经过一维卷积，然后最大池化得到。</p>
 <p>句法特征向量由词性Pos特征向量和二进制精确匹配EM特征向量组成。如果在另一个句子中有与该词具有相同词干或相同词元的词，那么EM值会被激活。</p>
-<h3 id="2-Eocoding-Layer"><a href="#2-Eocoding-Layer" class="headerlink" title="2. Eocoding Layer:"></a>2. Eocoding Layer:</h3><p>这一层主要是对输入v进行highway network + self attention + fuse gate过程</p>
+<h3 id="2-eocoding-layer"><a class="markdownIt-Anchor" href="#2-eocoding-layer"></a> 2. Eocoding Layer:</h3>
+<p>这一层主要是对输入v进行highway network + self attention + fuse gate过程</p>
 <ol>
 <li>attention的计算为W[a;a;axa]</li>
 <li>对attnetion进行softmax按照权重乘以v结果为attention</li>
@@ -286,14 +289,16 @@
 <li>其中z使用tanh激活函数。r,f使用sigmoid激活函数。</li>
 <li>res = r*v+f*z</li>
 </ol>
-<h3 id="3-Interaction-Layer"><a href="#3-Interaction-Layer" class="headerlink" title="3. Interaction Layer"></a>3. Interaction Layer</h3><p>对p和h进行点乘，结果为I</p>
-<h3 id="4-Feature-Extraction-layer"><a href="#4-Feature-Extraction-layer" class="headerlink" title="4. Feature Extraction layer"></a>4. Feature Extraction layer</h3><p>将相关性结果I通过DenseNet进行特征提取</p>
+<h3 id="3-interaction-layer"><a class="markdownIt-Anchor" href="#3-interaction-layer"></a> 3. Interaction Layer</h3>
+<p>对p和h进行点乘，结果为I</p>
+<h3 id="4-feature-extraction-layer"><a class="markdownIt-Anchor" href="#4-feature-extraction-layer"></a> 4. Feature Extraction layer</h3>
+<p>将相关性结果I通过DenseNet进行特征提取</p>
 <ul>
 <li>相比ResNet，DenseNet提出了一个更激进的密集连接机制：即互相连接所有的层，具体来说就是每个层都会接受其前面所有层作为其额外的输入</li>
 </ul>
 <ol>
 <li>DenseNet的网络结构主要由DenseBlock和Transition组成</li>
-<li>在DenseBlock中，各个层的特征图大小一致，可以在channel维度上连接。DenseBlock中的非线性组合函数 <img src="https://www.zhihu.com/equation?tex=H%28%5Ccdot%29" alt="[公式]"> 采用的是<strong>BN+ReLU+3x3 Conv</strong>的结构</li>
+<li>在DenseBlock中，各个层的特征图大小一致，可以在channel维度上连接。DenseBlock中的非线性组合函数 <img src="https://www.zhihu.com/equation?tex=H%28%5Ccdot%29" alt="[公式]" /> 采用的是<strong>BN+ReLU+3x3 Conv</strong>的结构</li>
 <li>对于Transition层，它主要是连接两个相邻的DenseBlock，并且降低特征图大小。Transition层包括一个1x1的卷积和2x2的AvgPooling，结构为<strong>BN+ReLU+1x1 Conv+2x2 AvgPooling</strong></li>
 </ol>
 <ul>
@@ -301,7 +306,8 @@
 <li>参数更小且计算更高效，这有点违反直觉，由于DenseNet是通过concat特征来实现短路连接，实现了特征重用，并且采用较小的growth rate，每个层所独有的特征图是比较小的；</li>
 <li>由于特征复用，最后的分类器使用了低级特征。</li>
 </ul>
-<h3 id="5-Output-Layer"><a href="#5-Output-Layer" class="headerlink" title="5. Output Layer"></a>5. Output Layer</h3><p>dense+softmax到分类类别个数上。对于匹配模型，就是0，1。</p>
+<h3 id="5-output-layer"><a class="markdownIt-Anchor" href="#5-output-layer"></a> 5. Output Layer</h3>
+<p>dense+softmax到分类类别个数上。对于匹配模型，就是0，1。</p>
 
                 
                 <hr>
@@ -427,7 +433,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#DIIN：密集交互推断网络"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">DIIN：密集交互推断网络</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-Embedding-Layer"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">1. Embedding Layer:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-Eocoding-Layer"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">2. Eocoding Layer:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-Interaction-Layer"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">3. Interaction Layer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-Feature-Extraction-layer"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">4. Feature Extraction layer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-Output-Layer"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">5. Output Layer</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#diin密集交互推断网络"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> DIIN：密集交互推断网络</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#1-embedding-layer"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> 1. Embedding Layer:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#2-eocoding-layer"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> 2. Eocoding Layer:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-interaction-layer"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text"> 3. Interaction Layer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#4-feature-extraction-layer"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text"> 4. Feature Extraction layer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#5-output-layer"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text"> 5. Output Layer</span></a></li></ol></li></ol>
             
           
           </div>

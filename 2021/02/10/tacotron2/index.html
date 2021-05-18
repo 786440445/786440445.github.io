@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">1</span> and
+                                Words <span class="post-count">375</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -195,13 +202,6 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,7 +274,43 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="Tacotron2"><a href="#Tacotron2" class="headerlink" title="Tacotron2"></a>Tacotron2</h1><h2 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h2><h2 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h2><h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2>
+                <h2 id="tacotron1"><a class="markdownIt-Anchor" href="#tacotron1"></a> Tacotron1：</h2>
+<h3 id="input_embedding"><a class="markdownIt-Anchor" href="#input_embedding"></a> input_embedding</h3>
+<h3 id="prenet"><a class="markdownIt-Anchor" href="#prenet"></a> prenet</h3>
+<ul>
+<li>prenet是通过 使用两层全连接映射 实现 [N,T,256] -&gt; [N,T,256] -&gt; [N,T,128]作用是对输入进行初步特征提取和dropout以提升泛化能力</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">prenet</span><span class="params">(inputs, is_training, layer_sizes, scope=None)</span>:</span></span><br><span class="line">  x = inputs</span><br><span class="line">  drop_rate = <span class="number">0.5</span> <span class="keyword">if</span> is_training <span class="keyword">else</span> <span class="number">0.0</span></span><br><span class="line">  <span class="keyword">with</span> tf.variable_scope(scope <span class="keyword">or</span> <span class="string">'prenet'</span>):</span><br><span class="line">    <span class="keyword">for</span> i, size <span class="keyword">in</span> enumerate(layer_sizes):</span><br><span class="line">      dense = tf.layers.dense(x, units=size, activation=tf.nn.relu, name=<span class="string">'dense_%d'</span> % (i+<span class="number">1</span>))</span><br><span class="line">      x = tf.layers.dropout(dense, rate=drop_rate, training=is_training, name=<span class="string">'dropout_%d'</span> % (i+<span class="number">1</span>))</span><br><span class="line">  <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<h3 id="encoder_cbhg"><a class="markdownIt-Anchor" href="#encoder_cbhg"></a> encoder_cbhg</h3>
+<ul>
+<li>encoder_cbhg是输入端的cbhg结构: 包含三部分</li>
+</ul>
+<ol>
+<li>Convolution Bank</li>
+</ol>
+<ul>
+<li>这一部分对于特征提取的思路是用height=1, width=word_dim的filter 过滤得到每一个input_embedding的特征值，然后相邻两个word一起过滤得到局部窗口为2的上下文特征值，即2-gram，一直提取出 16-gram。128个filter用于关注不同的特征值。</li>
+<li>大体上和textCNN的思路差不多，都是n-gram的思想，不同的是这里面进行卷积操作的时候使用的padding=‘same’ 为了保证对齐，textCNN里面我们用的时候使用 padding=‘valid’ 然后用reduce_max进行对齐。</li>
+<li>encoder_cbhg使用的 kernel_size 为 [1,2,3,…,16] filter_size = 128<br />
+每个conv1d 结果按照 axis = -1 拼接起来后的shape 为 [batch_size, Time_stmp,128*16]</li>
+</ul>
+<ol start="2">
+<li>Highway Network</li>
+</ol>
+<ul>
+<li>在residual connection 后 接了4层 highway net。highway net 就是加速的深层DNN。result shape = [batch_size,Time_stmp,128]</li>
+</ul>
+<ol start="3">
+<li>BiGRU</li>
+</ol>
+<ul>
+<li>输入是 highway net 的输出 shape = [batch_size,Time_stmp,128] 经过双向rnn 后 由于 num_units = 128 , 双向拼接后为 256 故而 result shape = [batch_size,Time_stmp,256]</li>
+</ul>
+<h1 id="tacotron2"><a class="markdownIt-Anchor" href="#tacotron2"></a> Tacotron2</h1>
+<h2 id="encoder"><a class="markdownIt-Anchor" href="#encoder"></a> Encoder</h2>
+<h2 id="decoder"><a class="markdownIt-Anchor" href="#decoder"></a> Decoder</h2>
+<h2 id="attention"><a class="markdownIt-Anchor" href="#attention"></a> Attention</h2>
+
                 
                 <hr>
                 <!-- Pager -->
@@ -399,7 +435,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Tacotron2"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Tacotron2</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Encoder"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Encoder</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Decoder"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Decoder</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Attention"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Attention</span></a></li></ol></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tacotron1"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> Tacotron1：</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#input_embedding"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> input_embedding</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#prenet"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> prenet</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#encoder_cbhg"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text"> encoder_cbhg</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#tacotron2"><span class="toc-nav-number"></span> <span class="toc-nav-text"> Tacotron2</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#encoder"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> Encoder</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#decoder"><span class="toc-nav-number">2.</span> <span class="toc-nav-text"> Decoder</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#attention"><span class="toc-nav-number">3.</span> <span class="toc-nav-text"> Attention</span></a></li></ol>
             
           
           </div>

@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://dusign.net/2021/05/01/gmm-hmm/</loc>
+    <lastmod>2021-05-18</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2021/05/01/melgan/</loc>
+    <lastmod>2021-05-17</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2020/04/02/hmm-and-crf/</loc>
+    <lastmod>2021-05-17</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2021/05/01/kaldi-libspeech/</loc>
+    <lastmod>2021-05-14</lastmod>
+  </url>
+  <url>
+    <loc>https://dusign.net/2021/02/10/tacotron2/</loc>
+    <lastmod>2021-05-13</lastmod>
+  </url>
+  <url>
     <loc>https://dusign.net/2019/11/01/Hexo-Theme-Snail/</loc>
     <lastmod>2021-05-11</lastmod>
   </url>
@@ -18,10 +38,6 @@
   </url>
   <url>
     <loc>https://dusign.net/2019/12/05/boosting/</loc>
-    <lastmod>2021-05-01</lastmod>
-  </url>
-  <url>
-    <loc>https://dusign.net/2020/04/02/hmm-and-crf/</loc>
     <lastmod>2021-05-01</lastmod>
   </url>
   <url>
@@ -49,10 +65,6 @@
     <lastmod>2021-05-01</lastmod>
   </url>
   <url>
-    <loc>https://dusign.net/2019/05/17/tensorflow-cnn-lenet5/</loc>
-    <lastmod>2021-05-01</lastmod>
-  </url>
-  <url>
     <loc>https://dusign.net/2020/04/09/textMatch-DIIN/</loc>
     <lastmod>2021-05-01</lastmod>
   </url>
@@ -65,7 +77,7 @@
     <lastmod>2021-05-01</lastmod>
   </url>
   <url>
-    <loc>https://dusign.net/2021/02/10/tacotron2/</loc>
+    <loc>https://dusign.net/2019/05/17/tensorflow-cnn-lenet5/</loc>
     <lastmod>2021-05-01</lastmod>
   </url>
   <url>
@@ -154,10 +166,6 @@
   </url>
   <url>
     <loc>https://dusign.net/2019/05/22/tensorflow-deep-lstm/</loc>
-    <lastmod>2021-05-01</lastmod>
-  </url>
-  <url>
-    <loc>https://dusign.net/2021/05/01/melgan/</loc>
     <lastmod>2021-05-01</lastmod>
   </url>
   <url>

@@ -125,7 +125,7 @@
                         
                             <div class="blank_box"></div>
                             <span class="meta">
-                                Words <span class="post-count">1</span> and
+                                Words <span class="post-count">120</span> and
                                 Reading Time <span class="post-count">1</span> Minutes
                             </span>
                             <div class="blank_box"></div>
@@ -187,6 +187,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -195,13 +202,6 @@
                         
                         <li>
                             <a href="/categories/">Categories</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -274,14 +274,32 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="MelGan"><a href="#MelGan" class="headerlink" title="MelGan"></a>MelGan</h1>
+                <h1 id="melgan"><a class="markdownIt-Anchor" href="#melgan"></a> MelGan</h1>
+<p>通过输入mel谱特征，生成wav数据，使用真实wav数据进行判别训练。<br />
+loss1：hingloss衡量生成wav与实际wav的差异。<br />
+loss2：衡量真实</p>
+<h2 id="generator"><a class="markdownIt-Anchor" href="#generator"></a> Generator</h2>
+<ul>
+<li>多层Conv1d: 对Mel频谱时域信息进行建模。使用weight norm能够让learning rate自适应/自稳定。</li>
+<li>2 * (Unsampling Layer + Residal Block):</li>
+</ul>
+<ol>
+<li>Unsampleing Layer：</li>
+<li>Residual Block：<br />
+1.</li>
+</ol>
+<ul>
+<li>由对齐的mel谱进行上采样到音频，采用反一维卷积完成，帧数*上采样倍数=采样点个数</li>
+</ul>
+<h2 id="descrimtor"><a class="markdownIt-Anchor" href="#descrimtor"></a> Descrimtor</h2>
+
                 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2021/05/01/interview-0430/" data-toggle="tooltip" data-placement="top" title="interview_0430">&larr; Previous Post</a>
+                        <a href="/2021/05/01/kaldi-libspeech/" data-toggle="tooltip" data-placement="top" title="kaldi">&larr; Previous Post</a>
                     </li>
                     
                     
@@ -399,7 +417,7 @@
           <strong class="toc-title">Contents</strong>
           
             
-              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#MelGan"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">MelGan</span></a></li></ol>
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#melgan"><span class="toc-nav-number">1.</span> <span class="toc-nav-text"> MelGan</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#generator"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text"> Generator</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#descrimtor"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text"> Descrimtor</span></a></li></ol></li></ol>
             
           
           </div>
