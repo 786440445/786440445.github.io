@@ -347,9 +347,53 @@
 
     
 
+    
+
 
 
 <!-- Main Content -->
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/05/26/chain-model/">
+                <h2 class="post-title">
+                    chain_model
+                </h2>
+                <h3 class="post-subtitle">
+                    
+                </h3>
+                <div class="post-content-preview">
+                     chain model训练过程
+
+单音素训练
+
+
+train_mono.sh  12345steps/train_mono.sh --cmd "$train_cmd" --nj 10 data/train data/lang exp/mono# params：1. train_data2. lang3. exp模型目录
+
+
+
+构图
+
+
+mkgraph.sh  12345utils/mkgr......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dusign on
+                    2021-05-26
+                </p>
+                <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
 
     
 
@@ -366,29 +410,13 @@
                      4.30 面试记录
  ASR:
 
-
 CE和CTC loss区别
 
-
-维特比算法
-
-
-1x1卷积和FC区别
-
-
-傅立叶变换和卷积计算的区别
-
-
- TTS
-
-
-MelGan
-
-
-什么是回归，自回归，分类与回归的区别
-
-
-...
+CE是基于帧粒度对两个序列的概率分布的相似程度进行建模，粒度比较细。
+loss=−Σi=0p(i)log(q(i))Nloss = -\frac{\Sigma_{i=0}{p(i)log(q(i))}}{N}
+loss=−​N​​Σ​i=0​​p(i)log(q(i))​​
+CTC loss
+引入blank符号，对进行序列的映......
                 </div>
             </a>
             
@@ -397,6 +425,45 @@ MelGan
                     2021-05-01
                 </p>
                 <div class="tags">
+                    
+                </div>
+            
+
+        </div>
+        <hr>
+
+    
+
+    
+
+        <div class="post-preview">
+
+            <a href="/2021/05/01/melgan/">
+                <h2 class="post-title">
+                    melgan
+                </h2>
+                <h3 class="post-subtitle">
+                    MelGan
+                </h3>
+                <div class="post-content-preview">
+                     MelGan
+通过输入mel谱特征，生成wav数据，使用真实wav数据进行判别训练。
+loss1：hingloss衡量生成wav与实际wav的差异。
+loss2：衡量真实
+ Generator
+
+多层Conv1d: 对Mel频谱时域信息进行建模。使用weight norm能够让learning rate自适应/自稳定。
+2 * (Unsampling Layer + Residal Blo......
+                </div>
+            </a>
+            
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by Dusign on
+                    2021-05-01
+                </p>
+                <div class="tags">
+                    
+                      <a href="/tags/#TTS" title="TTS">TTS</a>
                     
                 </div>
             
@@ -470,45 +537,6 @@ p(y∣x)=​p(x)​​p(......
                 <div class="tags">
                     
                       <a href="/tags/#ASR" title="ASR">ASR</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
-    
-
-        <div class="post-preview">
-
-            <a href="/2021/05/01/melgan/">
-                <h2 class="post-title">
-                    melgan
-                </h2>
-                <h3 class="post-subtitle">
-                    MelGan
-                </h3>
-                <div class="post-content-preview">
-                     MelGan
-通过输入mel谱特征，生成wav数据，使用真实wav数据进行判别训练。
-loss1：hingloss衡量生成wav与实际wav的差异。
-loss2：衡量真实
- Generator
-
-多层Conv1d: 对Mel频谱时域信息进行建模。使用weight norm能够让learning rate自适应/自稳定。
-2 * (Unsampling Layer + Residal Blo......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dusign on
-                    2021-05-01
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#TTS" title="TTS">TTS</a>
                     
                 </div>
             
@@ -702,44 +730,6 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
 
     
 
-    
-
-        <div class="post-preview">
-
-            <a href="/2020/04/09/textMatch-DIIN/">
-                <h2 class="post-title">
-                    密集交互推断网络DIIN
-                </h2>
-                <h3 class="post-subtitle">
-                    深度学习
-                </h3>
-                <div class="post-content-preview">
-                     DIIN：密集交互推断网络
- 1. Embedding Layer:
-将词向量，字符特征向量和句法特征向量 进行串联。
-词向量可以是通过预训练模型word2vec拿到。
-字符特征向量是将字符向量 经过一维卷积，然后最大池化得到。
-句法特征向量由词性Pos特征向量和二进制精确匹配EM特征向量组成。如果在另一个句子中有与该词具有相同词干或相同词元的词，那么EM值会被激活。
- 2. Eocodi......
-                </div>
-            </a>
-            
-                <p class="post-meta" style="margin: 10px 0;">
-                    Posted by Dusign on
-                    2020-04-09
-                </p>
-                <div class="tags">
-                    
-                      <a href="/tags/#文本匹配" title="文本匹配">文本匹配</a>
-                    
-                </div>
-            
-
-        </div>
-        <hr>
-
-    
-
 
 
 <!-- Pager -->
@@ -813,11 +803,9 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
             
         
             
+        
+            
             <a href="/tags/#ASR" title="ASR" rel="2">ASR</a>
-            
-        
-            
-        
             
         
             
@@ -827,9 +815,11 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
             
         
             
-            <a href="/tags/#文本匹配" title="文本匹配" rel="3">文本匹配</a>
+        
             
         
+            
+            <a href="/tags/#文本匹配" title="文本匹配" rel="3">文本匹配</a>
             
         
             
@@ -930,7 +920,15 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
     <ul>
       
         <li>
+          <a href="/2021/05/26/chain-model/">chain_model</a>
+        </li>
+      
+        <li>
           <a href="/2021/05/01/interview-0430/">interview_0430</a>
+        </li>
+      
+        <li>
+          <a href="/2021/05/01/melgan/">melgan</a>
         </li>
       
         <li>
@@ -939,14 +937,6 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
       
         <li>
           <a href="/2021/05/01/kaldi-libspeech/">kaldi-libspeech</a>
-        </li>
-      
-        <li>
-          <a href="/2021/05/01/melgan/">melgan</a>
-        </li>
-      
-        <li>
-          <a href="/2021/02/10/tacotron2/">tacotron2</a>
         </li>
       
     </ul>
@@ -975,7 +965,7 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">8</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">8</span></li></ul>
     </div>
 
         <hr>
@@ -1186,7 +1176,7 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
         
 
         
-            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&#34;🌱&#34;,&#34;just do it&#34;,&#34;🍀&#34;]' color='[&#34;rgb(121,93,179)&#34; ,&#34;rgb(76,180,231)&#34; ,&#34;rgb(184,90,154)&#34;]'></script>
         
 
         <!-- background effects end -->
@@ -1196,21 +1186,6 @@ wordvec是一种训练词向量分布式表示（distrubute representation）的
     
         <script src="/js/ribbonDynamic.js"></script>
     
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>
