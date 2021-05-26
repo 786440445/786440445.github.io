@@ -1,5 +1,5 @@
 ---
-title: kaldi
+title: gmm-hmm,生成模型和判别模型
 catalog: true
 toc_nav_num: true
 mathjax: true
@@ -36,17 +36,33 @@ $$
 - 单音速训练过程：
 1. 按照输入features（T，D），对应音速三状态，进行帧数均分。（类似Kmeans初始化）。
 2. 一个HMM状态可以多个帧。使用多个帧的features对该HMM状态中的观测概率分布进行建模，通用使用GMM。
-   
-    > GMM计算过程：(高斯混合模型)，混合系数 $\pi$ , 均值，协方差矩阵为参数。E-M算法更新。 
-    > 1. 计算分模型k对观测数据yi的响应度r。E：step
-    $$\gamma_{jk}=\frac{a_{k}\varPhi(y_{i}|\theta)}{{\Sigma}a_{k}\varPhi(y_{i}|\theta)}$$
-    > 2. 根据相应度，迭代新一论参数。M：step
-    $$ \mu_{k}=\frac{{\Sigma}\gamma_{jk}y_{j}}{{\Sigma}_{j=1}\gamma_{jk}} $$
-    $$ \sigma^2=\frac{{\Sigma}\gamma_{jk}(y_{j}-\mu_{k})^2}{{\Sigma}_{j=1}\gamma_{jk}} $$
-    $$ a_{k} = \frac{{\Sigma}\gamma_{jk}}{N} $$
 
-3. 对HMM进行学习建模，数转移状态转移cout，得到发射矩阵，转移矩阵。即为HMM参数。
-4. 重对齐: Vertibi算法进行解码，预测输入freatures实际的状态序列。
-5. 由一个状态对应的多个帧继续对GMM状态进行更新。循环依次迭代。
+- GMM计算过程：(高斯混合模型)，混合系数 $\pi$ , 均值，协方差矩阵为参数。E-M算法更新。 
+
+- 计算分模型k对观测数据yi的响应度r。E：step
+    $$
+    {% raw %}
+    \gamma_{jk}=\frac{a_k\varPhi(y_i|\theta)}{{\Sigma}a_k\varPhi(y_i|\theta)}
+    {% endraw %}
+    $$
+
+- 根据相应度，迭代新一论参数。M：step
+    $$
+    {% raw %}
+    \mu_k=\frac{\Sigma\gamma_{jk}y_j}{\Sigma_{j=1}\gamma_{jk}} 
+    {% endraw %}
+    $$
+
+    $$ 
+    \sigma^2=\frac{\Sigma\gamma_{jk}(y_j-\mu_{k})^2}{\Sigma_{j=1}\gamma_{ij}} 
+    $$
+
+    $$ 
+    a_{k} = \frac{\Sigma\gamma_{jk}}{N} 
+    $$
+
+1. 对HMM进行学习建模，数转移状态转移cout，得到发射矩阵，转移矩阵。即为HMM参数。
+2. 重对齐: Vertibi算法进行解码，预测输入freatures实际的状态序列。
+3. 由一个状态对应的多个帧继续对GMM状态进行更新。循环依次迭代。
 
   

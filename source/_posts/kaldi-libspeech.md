@@ -1,5 +1,5 @@
 ---
-title: kaldi
+title: kaldi-libspeech
 catalog: true
 toc_nav_num: true
 mathjax: true
