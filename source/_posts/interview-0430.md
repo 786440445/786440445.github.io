@@ -56,7 +56,15 @@ x-vector。
 ## TTS
 
 - MelGan的损失函数
+1. hinge-loss
+2. MSE-loss
+3. 
 
 
 - 什么是回归，自回归，分类与回归的区别
 
+
+### 5.26 面试记录
+1. self attention在实时ASR过程中的训练及预测方法
+2. CTC+language model怎么训练的
+3. kaldi chain model流程
