@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="093lY4ziMu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="A hexo theme">
+    <meta name="keyword"  content="dusign, hexo-theme-snail">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+    <title>
+        
+          CTC原理解析 - Hexo-theme-snail
+        
+    </title>
+
+    <link rel="canonical" href="https://dusign.net/2019/07/09/speech-ctc-md/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS --> 
+    
+        
+<link rel="stylesheet" href="/css/dusign-light.css">
+
+        
+<link rel="stylesheet" href="/css/dusign-common-light.css">
+
+        
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+        
+<link rel="stylesheet" href="/css/toc.css">
+
+        <!-- background effects end -->
+    
+    
+    <!-- Pygments Highlight CSS -->
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
+
+    
+<link rel="stylesheet" href="/css/widget.css">
+
+
+    
+<link rel="stylesheet" href="/css/rocket.css">
+
+
+    
+<link rel="stylesheet" href="/css/signature.css">
+
+
+    
+<link rel="stylesheet" href="/css/fonts.googleapis.css">
+
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- photography -->
+    
+<link rel="stylesheet" href="/css/photography.css">
+
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- background effects start -->
+    
+    <!-- background effects end -->
+
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            
+                background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('')
+                /*post*/
+            
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/dusign.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#语音识别" title="语音识别">语音识别</a>
+                            
+                        </div>
+                        <h1>CTC原理解析</h1>
+                        <h2 class="subheading">连接时序分类CTC</h2>
+                        <span class="meta">
+                            Posted by Dusign on
+                            2019-07-09
+                        </span>
+
+                        
+                            <div class="blank_box"></div>
+                            <span class="meta">
+                                Words <span class="post-count">1.2k</span> and
+                                Reading Time <span class="post-count">4</span> Minutes
+                            </span>
+                            <div class="blank_box"></div>
+                            <!-- 不蒜子统计 start -->
+                            <span class="meta">
+                                Viewed <span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span> Times
+                            </span>
+                            <!-- 不蒜子统计 end -->
+                        
+
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>      
+    </div>
+
+    
+    <div class="waveWrapper">
+        <div class="wave wave_before" style="background-image: url('/img/wave-light.png')"></div>
+        <div class="wave wave_after" style="background-image: url('/img/wave-light.png')"></div>
+    </div>
+    
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Super Snail</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/categories/">Categories</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photography/">Photography</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                    
+                    <li>
+                        <a href="YOUR_CHINESE_BLOG_URL" target="_blank">Chinese Blog</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="CTC简介-Connectionist-Temporal-Classfication"><a href="#CTC简介-Connectionist-Temporal-Classfication" class="headerlink" title="CTC简介(Connectionist Temporal Classfication)"></a>CTC简介(Connectionist Temporal Classfication)</h1><p>连接时序分类，适合不知道输入输出是否对其的情况使用的算法，所以CTC适合语音识别和手写字符识别的任务。</p>
+<h2 id="CTC原理"><a href="#CTC原理" class="headerlink" title="CTC原理"></a>CTC原理</h2><p>我们定义如下，输入用符号序列X=[x1,x2,…xT], Y=[y1,y2,…yU],为了方便训练这些数据我闷希望能够找到输入X和输出Y之间的映射关系。</p>
+<h2 id="损失函数定义"><a href="#损失函数定义" class="headerlink" title="损失函数定义"></a>损失函数定义</h2><p>对于给定的输入X，我们训练模型希望最大化Y的后验概率P(Y|X)，P(Y|X)应该是可导的，这样就能利用梯度下降训练模型了。</p>
+<h2 id="对齐存在的问题"><a href="#对齐存在的问题" class="headerlink" title="对齐存在的问题"></a>对齐存在的问题</h2><p><img src="/img/article/ctc_duiqi.png" alt=""></p>
+<ul>
+<li>通常这种对齐方式是不合理的，比如在语音识别任务中，有些音频可能是无声的，这时候应该是没有字符输出的</li>
+<li>对于一些本应含有重复字符的输出，这种对齐方式没法得到准确的输出。例如输出对齐的结果为[h, h, e, l, l, l, o],通过去重操作后得到的不是“hello”而是“helo”</li>
+</ul>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
+<li>为了解决上述问题，CTC算法引入一个新的占位符用于输出对齐结果。这个占位符称为空白占位符，通常使用符号<script type="math/tex">\epsilon</script>,这个符号在对齐结果中输出，但是在最后的去重操作将会所有的<script type="math/tex">\epsilon</script>删除得到最终的输出。利用这个占位符，可以将输入与输出有了非常合理的对应关系。<br><img src="/img/article/ctc_duiqi2.png" alt=""></li>
+<li>在这个映射方式中，如果在标定文本中有重复的字符，对齐过程中会在两个重复的字符当中插入<script type="math/tex">\epsilon</script>占位符。利用这个规则，上面的“hello”就不会变成“helo”了。<br><img src="/img/article/ctc_duiqi3.png" alt=""></li>
+</ul>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><ol>
+<li>CTC对齐输入输出是多对一的。多条路径最后的输出都是hello，要讲所有的路径相加才是输出的条件概率。</li>
+<li>对于一对输入输出(X,Y)来说，CTC的目标是将下式概率最大化。<script type="math/tex; mode=display">
+p(Y | X)=\sum_{A \in \mathcal{A}_{X, Y}} \prod_{t=1}^{T} p_{t}\left(a_{t} | X\right)</script>乘法表示一条路径的所有字符概率相乘，加法表示多条路径。</li>
+<li>对于一个输出，路径会非常多，这样直接计算概率是不现实的，CTC算法采用动态规划的思想来求解输出的条件概率。<br><img src="/img/article/ctc_method.png" alt=""></li>
+</ol>
+<h1 id="动态规划求解最大后验概率方法"><a href="#动态规划求解最大后验概率方法" class="headerlink" title="动态规划求解最大后验概率方法"></a>动态规划求解最大后验概率方法</h1><p><img src="/img/article/ctc_dynamic_p.png" alt=""></p>
+<ul>
+<li><script type="math/tex">\alpha</script>表示对齐结果合并后节点的概率，</li>
+<li>如图所示可以采用动态规划求解该类问题。</li>
+</ul>
+<h2 id="Case1"><a href="#Case1" class="headerlink" title="Case1:"></a>Case1:</h2><ol>
+<li>如果<script type="math/tex">\alpha_{s, t}=\epsilon</script>，则<script type="math/tex">\alpha_{s, t}</script>只能由前一个字符<script type="math/tex">\alpha_{s-1, t-1}</script>或者本身<script type="math/tex">\alpha_{s, t-1}</script>得到</li>
+<li>如果<script type="math/tex">\alpha_{s, t}</script>不等于<script type="math/tex">\epsilon</script>,且<script type="math/tex">\alpha_{s, t}</script>为连续字符的第二个(上面第二个o)，则<script type="math/tex">\alpha_{s, t}</script>只能由一个空白符<script type="math/tex">\alpha_{s-1, t-1}</script>或者其本身<script type="math/tex">\alpha_{s, t-1}</script>得到，而不能由前一个字符得到。</li>
+</ol>
+<ul>
+<li>上述两种情况中，<script type="math/tex">\alpha_{s, t}</script>可由下式算出，其中<script type="math/tex">p_{t}\left(z_{s} | X\right)</script>表示在时刻t输出字符<script type="math/tex">z_{s}</script>的概率。<script type="math/tex; mode=display">
+\alpha_{s, t}=(\alpha(s, t-1)+\alpha(s-1, t-1)) \cdot p_{t}\left(z_{s} | X\right)</script></li>
+</ul>
+<h2 id="Case2"><a href="#Case2" class="headerlink" title="Case2:"></a>Case2:</h2><ol>
+<li>如果<script type="math/tex">\alpha_{s, t}</script>不等于<script type="math/tex">\epsilon</script>，则可由<script type="math/tex">\alpha_{s-2, t-1}, \alpha_{s-1, t-1}, \alpha_{s, t-1}</script>得来。<script type="math/tex; mode=display">
+\alpha_{s, t}=(\alpha(s, t-1)+\alpha(s-1, t-1)+\alpha(s-2, t-1)) \cdot p_{t}\left(z_{s} | X\right)</script></li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上图中输出两个终止点，最后输出的条件概率为两个终止点输出的概率之和，使用这种方法就能高效的计算损失函数。<br>模型的目标就是最小化负对数似然函数</p>
+<script type="math/tex; mode=display">
+\sum_{(X, Y) \in \mathcal{D}}-\log p(Y | X)</script><h1 id="CTC解码函数"><a href="#CTC解码函数" class="headerlink" title="CTC解码函数"></a>CTC解码函数</h1><h2 id="ctc-greedy-decoder"><a href="#ctc-greedy-decoder" class="headerlink" title="ctc_greedy_decoder"></a>ctc_greedy_decoder</h2><ul>
+<li>采用贪婪算法进行解码</li>
+</ul>
+<ol>
+<li>即直接算出每个时刻取概率最大的字符作为输出。</li>
+<li>通常这种算法很有效，但是忽略了一个输出可能对应对个对齐结果。例如[a,a,null]和[a,a,a]各自概率均小于[b,b,b]，该算法得到的结果为Y=[b],但是结果为Y=[a]更为合理。</li>
+</ol>
+<h2 id="ctc-beam-search-decoder"><a href="#ctc-beam-search-decoder" class="headerlink" title="ctc_beam_search_decoder"></a>ctc_beam_search_decoder</h2><ul>
+<li>采用集束搜索算法</li>
+</ul>
+<ol>
+<li>该算法有个参数为width，假设宽度为3，在RNN输出中，该算法每个时间t输出时。不同于贪婪算法只找最高的，而是找最高的三个概率作为下一次的输入，依次迭代。(当width=1时，则就变成贪婪算法)。</li>
+</ol>
+
+                
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/07/10/fsmn-model/" data-toggle="tooltip" data-placement="top" title="FSMN前馈型序列记忆网络">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/07/03/get-mfcc-features/" data-toggle="tooltip" data-placement="top" title="get_mfcc_features">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <!-- tip start -->
+                
+
+                
+                <div class="comment_notes">
+                    <p>
+                        This is copyright.
+                    </p>
+                </div>
+                
+                <!-- tip end -->
+
+                <!-- Music start-->
+                
+                
+<link rel="stylesheet" href="/css/music-player/fonts/iconfont.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/reset.css">
+
+
+<link rel="stylesheet" href="/css/music-player/css/player.css">
+
+
+<div class="music-player">
+    <audio class="music-player__audio" ></audio>
+    <div class="music-player__main">
+        <div class="music-player__blur"></div>
+        <div class="music-player__disc">
+            <div class="music-player__image">
+                <img width="100%" src="" alt="">
+            </div>
+            <div class="music-player__pointer"><img width="100%" src="/img/cd_tou.png" alt=""></div>
+        </div>
+        <div class="music-player__controls">
+            <div class="music__info">
+                <h3 class="music__info--title">...</h3>
+                <p class="music__info--singer">...</p>
+            </div>
+            <div class="player-control">
+                <div class="player-control__content">
+                    <div class="player-control__btns">
+                        <div class="player-control__btn player-control__btn--prev"><i class="iconfont icon-prev"></i></div>
+                        <div class="player-control__btn player-control__btn--play"><i class="iconfont icon-play"></i></div>
+                        <div class="player-control__btn player-control__btn--next"><i class="iconfont icon-next"></i></div>
+                        <div class="player-control__btn player-control__btn--mode"><i class="iconfont icon-loop"></i></div>
+                    </div>
+                    <div class="player-control__volume">
+                        <div class="control__volume--icon player-control__btn"><i class="iconfont icon-volume"></i></div>
+                        <div class="control__volume--progress player_progress"></div>
+                    </div>
+                </div>
+                <div class="player-control__content">
+                    <div class="player__song--progress player_progress"></div>
+                    <div class="player__song--timeProgess nowTime">00:00</div>
+                    <div class="player__song--timeProgess totalTime">00:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/music-player/utill.js"></script>
+
+
+<script src="/js/music-player/jquery.min.js"></script>
+
+<!-- netease; qqkg -->
+<!--
+<script src="/js/music-player/player.js?library=config.music.library.js"></script>
+-->
+<script src="../../../../js/music-player/player.js?library=netease&music=https://kg.qq.com/node/play?s=7deFpz7Z26Jmv7di&g_f=share_html"></script>
+                
+                <!-- Music end -->
+
+                <!-- Sharing -->
+                
+                <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                <!--  css & js -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!-- Sharing -->
+
+                <!-- gitment start -->
+                
+                <!-- gitment end -->
+
+                <!-- 来必力City版安装代码 -->
+                
+                <!-- City版安装代码已完成 -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      
+        <aside id="sidebar">
+          <div id="toc" class="toc-article">
+          <strong class="toc-title">Contents</strong>
+          
+            
+              <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#CTC简介-Connectionist-Temporal-Classfication"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">CTC简介(Connectionist Temporal Classfication)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#CTC原理"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">CTC原理</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#损失函数定义"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">损失函数定义</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#对齐存在的问题"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">对齐存在的问题</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#解决方法"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">解决方法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#损失函数"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">损失函数</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#动态规划求解最大后验概率方法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">动态规划求解最大后验概率方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Case1"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Case1:</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Case2"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Case2:</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">总结</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#CTC解码函数"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">CTC解码函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ctc-greedy-decoder"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">ctc_greedy_decoder</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ctc-beam-search-decoder"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">ctc_beam_search_decoder</span></a></li></ol></li></ol>
+            
+          
+          </div>
+        </aside>
+      
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#语音识别" title="语音识别">语音识别</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://blog.csdn.net/d_Nail" target="_blank">Dusign&#39;s Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Dusign&#39;s Web</a></li>
+                    
+                        <li><a href="https://github.com/dusign" target="_blank">Dusign&#39;s Github</a></li>
+                    
+                        <li><a href="#" target="_blank">Other</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+
+<style  type="text/css">
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/dusign">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/Gang Du">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/dusignr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Dusign 2021 
+                    <br>
+                    Powered by 
+                    <a href="https://github.com/dusign/hexo-theme-snail" target="_blank" rel="noopener">
+                        <i>hexo-theme-snail</i>
+                    </a> | 
+                    <iframe name="star" style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0"
+                        width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=dusign&repo=hexo-theme-snail&type=star&count=true">
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- Search -->
+
+<script src="/js/search.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://dusign.net/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Search -->
+
+    <script type="text/javascript">      
+        var search_path = "search.xml";
+        if (search_path.length == 0) {
+            search_path = "search.xml";
+        }
+    var path = "/" + search_path;
+    searchFunc(path, 'local-search-input', 'local-search-result');
+    </script>
+
+
+<!-- busuanzi -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+        <!-- background effects line -->
+        
+
+        
+            <script type="text/javascript" src="/js/mouse-click.js" content='[&quot;🌱&quot;,&quot;just do it&quot;,&quot;🍀&quot;]' color='[&quot;rgb(121,93,179)&quot; ,&quot;rgb(76,180,231)&quot; ,&quot;rgb(184,90,154)&quot;]'></script>
+        
+
+        <!-- background effects end -->
+    
+
+    <!--<script size="50" alpha='0.3' zIndex="-999" src="/js/ribbonStatic.js"></script>-->
+    
+        <script src="/js/ribbonDynamic.js"></script>
+    
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+
+</html>
